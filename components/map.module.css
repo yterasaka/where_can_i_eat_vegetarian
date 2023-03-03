@@ -1,0 +1,5 @@
+.body {
+  background-color: aqua;
+  height: calc(100svh - 60px);
+  width: 100%;
+}
