@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import { MarkerF, InfoWindowF } from "@react-google-maps/api";
-// ドキュメントには書かれてないけど、React 18+ では `Marker` ではなく `MarkerF` と書かないとマーカーが表示されない
-// InfoWindowも `InfoWindowsF` と書かないとうまく機能しない
 
 export default function PlaceInfo() {
   // マーカー
@@ -30,11 +28,7 @@ export default function PlaceInfo() {
           }}
           onClick={() => {
             setSelected(marker);
-            // クリックで<InfoWindow>が描画される
-            console.log(selected);
           }}
-          // `icon` propsでアイコン表示の設定も可能
-          // 詳しくはドキュメントを参照
         />
       ))}
 

@@ -2,7 +2,20 @@ import Head from "next/head";
 import Layout from "../components/Layout";
 import Map from "../components/Map";
 
+// import { useState, useEffect } from "react";
+
 export default function Home() {
+  // const [data, setData] = useState(null);
+
+  // useEffect(() => {
+  //   fetch("/api/yelp")
+  //     .then((response) => response.json())
+  //     .then((data) => setData(data));
+  // }, []);
+
+  // const dataJson = JSON.parse(data);
+  // console.log(dataJson.jsonBody.businesses);
+
   return (
     <Layout>
       <Head>
