@@ -1,4 +1,4 @@
-import React, { useRef, useCallback } from "react";
+import React, { useRef, useCallback, useState, useEffect } from "react";
 import { GoogleMap, useJsApiLoader } from "@react-google-maps/api";
 import PlaceInfo from "./Placeinfo";
 
@@ -8,22 +8,59 @@ const containerStyle = {
   height: "calc(100svh - 60px)",
 };
 
-// テスト
-const center = {
-  lat: 35.710057714926265,
-  lng: 139.81071829999996,
-};
-
-// オプション
 const options = {
   disableDefaultUI: true, // 衛星写真オプションをキャンセル
   zoomControl: true,
 };
 
-function Map() {
+function Map({ selectedCity }) {
   const { isLoaded, loadError } = useJsApiLoader({
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY,
   });
+  const [center, setCenter] = useState("");
+
+  useEffect(() => {
+    const centerCity = () => {
+      switch (selectedCity) {
+        case "Tokyo":
+          setCenter({
+            lat: 35.681236,
+            lng: 139.767125,
+          });
+          break;
+        case "Yokohama":
+          setCenter({
+            lat: 35.465981,
+            lng: 139.622062,
+          });
+          break;
+        case "Nagoya":
+          setCenter({
+            lat: 35.170915,
+            lng: 136.881537,
+          });
+          break;
+        case "Kyoto":
+          setCenter({
+            lat: 34.985849,
+            lng: 135.758767,
+          });
+          break;
+        case "Osaka":
+          setCenter({
+            lat: 34.702485,
+            lng: 135.495951,
+          });
+          break;
+        default:
+          setCenter({
+            lat: 35.681236,
+            lng: 139.767125,
+          });
+      }
+    };
+    centerCity();
+  }, [selectedCity]);
 
   const mapRef = useRef();
   const onMapLoad = useCallback((map) => {
@@ -35,7 +72,7 @@ function Map() {
       <GoogleMap
         mapContainerStyle={containerStyle}
         center={center}
-        zoom={15}
+        zoom={13}
         options={options}
         onLoad={onMapLoad}
       >

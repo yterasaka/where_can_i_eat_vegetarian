@@ -3,7 +3,12 @@ import Link from "next/link";
 import styles from "./layout.module.css";
 import { FiGithub, FiLinkedin } from "react-icons/fi";
 
-const Layout = ({ children }) => {
+const Layout = ({ children, selectedCity, setSelectedCity }) => {
+  const cities = ["Tokyo", "Yokohama", "Nagoya", "Kyoto", "Osaka"];
+  const handleChange = (e) => {
+    setSelectedCity(e.target.value);
+  };
+
   return (
     <div className={styles.container}>
       <header className={styles.header}>
@@ -16,12 +21,16 @@ const Layout = ({ children }) => {
             className={styles.logo}
           />
           <p className={styles.title}>Where Can I Eat Vegetarian in</p>
-          <select className={styles.selecter} name="city">
-            <option value="Tokyo">Tokyo</option>
-            <option value="Yokohama">Yokohama</option>
-            <option value="Nagoya">Nagoya</option>
-            <option value="Kyoto">Kyoto</option>
-            <option value="Osaka">Osaka</option>
+          <select
+            className={styles.selecter}
+            value={selectedCity}
+            onChange={handleChange}
+          >
+            {cities.map((city) => (
+              <option key={city} value={city}>
+                {city}
+              </option>
+            ))}
           </select>
           <p>?</p>
         </div>
