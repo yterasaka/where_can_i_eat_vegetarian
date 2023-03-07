@@ -1,0 +1,14 @@
+.infoWindows {
+  color: var(--darkgray);
+}
+
+.alias {
+  font-size: 0.9rem;
+  font-style: italic;
+}
+
+.categories {
+  font-size: 0.9rem;
+  margin-bottom: 5px;
+  color: var(--darkgreen);
+}

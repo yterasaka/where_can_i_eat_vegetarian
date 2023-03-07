@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { MarkerF, InfoWindowF } from "@react-google-maps/api";
+import Link from "next/link";
+import styles from "./placeinfo.module.css";
 
 export default function PlaceInfo({ businessList }) {
   const [selected, setSelected] = useState(null);
-
-  console.log(selected);
 
   return (
     <>
@@ -22,7 +22,6 @@ export default function PlaceInfo({ businessList }) {
       ))}
 
       {selected ? (
-        // MarkerがクリックされたときにInfoWindowが表示される
         <InfoWindowF
           position={{
             lat: selected.coordinates.latitude,
@@ -32,7 +31,14 @@ export default function PlaceInfo({ businessList }) {
             setSelected(null);
           }}
         >
-          <div>{selected.name}</div>
+          <div className={styles.infoWindows}>
+            <h1>{selected.name}</h1>
+            <p className={styles.alias}>{selected.alias}</p>
+            <p className={styles.categories}>{selected.categories}</p>
+            <p>{selected.location}</p>
+            <p>{selected.phone}</p>
+            <Link href={selected.url}>Link</Link>
+          </div>
         </InfoWindowF>
       ) : null}
     </>
