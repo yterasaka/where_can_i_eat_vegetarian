@@ -72,7 +72,7 @@ function Map({ selectedCity }) {
       <GoogleMap
         mapContainerStyle={containerStyle}
         center={center}
-        zoom={13}
+        zoom={14}
         options={options}
         onLoad={onMapLoad}
       >
