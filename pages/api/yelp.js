@@ -10,8 +10,6 @@ export default function handler(req, res) {
     categories: "vegetarian",
   };
 
-  console.log(searchRequest);
-
   const client = yelp.client(apiKey);
 
   client

@@ -22,8 +22,28 @@ export default function Home() {
     postData();
   }, [selectedCity]);
 
-  const dataJson = JSON.parse(data); // JSONからJSのオブジェクトに変換
+  const dataJson = JSON.parse(data);
+  // console.log(dataJson);
   // console.log(dataJson.jsonBody.businesses);
+
+  // オプショナルチェイニング演算子 ?. を使用することで、data が null の場合には処理がスキップされ、エラーが発生しなくなる
+  const businessList = dataJson?.jsonBody?.businesses?.map((business) => {
+    const businessInfo = {
+      id: business.id,
+      name: business.name,
+      coordinates: {
+        latitude: business.coordinates.latitude,
+        longitude: business.coordinates.longitude,
+      },
+      location: business.location.display_address.join(", "),
+      phone: business.phone,
+      url: business.url,
+      image_url: business.image_url,
+    };
+    return businessInfo;
+  });
+
+  console.log(businessList);
 
   return (
     <Layout selectedCity={selectedCity} setSelectedCity={setSelectedCity}>
@@ -37,7 +57,11 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <Map selectedCity={selectedCity} data={data} />
+        <Map
+          selectedCity={selectedCity}
+          data={data}
+          businessList={businessList}
+        />
       </main>
     </Layout>
   );

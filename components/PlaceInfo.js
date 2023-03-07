@@ -1,30 +1,19 @@
 import React, { useState } from "react";
 import { MarkerF, InfoWindowF } from "@react-google-maps/api";
 
-export default function PlaceInfo() {
-  // マーカー
-  const places = [
-    {
-      info: "info1",
-      location: { lat: 35.710057714926265, lng: 139.81071829999996 },
-    },
-    {
-      info: "info2",
-      location: { lat: 35.69731, lng: 139.7747 },
-    },
-  ];
-
-  // 選択（クリック）したマーカーのステート
+export default function PlaceInfo({ businessList }) {
   const [selected, setSelected] = useState(null);
+
+  console.log(selected);
 
   return (
     <>
-      {places.map((marker) => (
+      {businessList?.map((marker) => (
         <MarkerF
-          key={`${marker.location.lat * marker.location.lng}`}
+          key={`${marker.coordinates.latitude * marker.coordinates.longitude}`}
           position={{
-            lat: marker.location.lat,
-            lng: marker.location.lng,
+            lat: marker.coordinates.latitude,
+            lng: marker.coordinates.longitude,
           }}
           onClick={() => {
             setSelected(marker);
@@ -36,14 +25,14 @@ export default function PlaceInfo() {
         // MarkerがクリックされたときにInfoWindowが表示される
         <InfoWindowF
           position={{
-            lat: selected.location.lat,
-            lng: selected.location.lng,
+            lat: selected.coordinates.latitude,
+            lng: selected.coordinates.longitude,
           }}
           onCloseClick={() => {
             setSelected(null);
           }}
         >
-          <div>{selected.info}</div>
+          <div>{selected.name}</div>
         </InfoWindowF>
       ) : null}
     </>

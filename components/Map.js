@@ -13,7 +13,7 @@ const options = {
   zoomControl: true,
 };
 
-function Map({ selectedCity }) {
+function Map({ selectedCity, businessList }) {
   const { isLoaded, loadError } = useJsApiLoader({
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY,
   });
@@ -78,7 +78,7 @@ function Map({ selectedCity }) {
       >
         {
           // ...Your map components
-          <PlaceInfo />
+          <PlaceInfo businessList={businessList} />
         }
       </GoogleMap>
     );
