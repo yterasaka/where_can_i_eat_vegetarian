@@ -1,6 +1,6 @@
 import React, { useRef, useCallback, useState, useEffect } from "react";
 import { GoogleMap, useJsApiLoader } from "@react-google-maps/api";
-import PlaceInfo from "./Placeinfo";
+import PlaceInfo from "./PlaceInfo";
 
 // 地図の大きさを指定
 const containerStyle = {
