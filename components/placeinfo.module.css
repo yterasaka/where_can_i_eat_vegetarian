@@ -12,3 +12,9 @@
   margin-bottom: 5px;
   color: var(--darkgreen);
 }
+
+.star {
+  font-size: 0.9rem;
+  color: var(--darkgreen);
+  vertical-align: -1px;
+}

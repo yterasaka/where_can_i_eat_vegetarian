@@ -23,6 +23,7 @@ export default function Home() {
   }, [selectedCity]);
 
   const dataJson = JSON.parse(data);
+  console.log(dataJson?.jsonBody?.businesses);
 
   // オプショナルチェイニング演算子 ?. を使用することで、data が null の場合には処理がスキップされ、エラーが発生しなくなる
   const businessList = dataJson?.jsonBody?.businesses?.map((business) => {
@@ -30,6 +31,8 @@ export default function Home() {
       id: business.id,
       name: business.name,
       alias: business.alias,
+      rating: business.rating,
+      price: business.price,
       categories: business.categories
         .map((category) => category.title)
         .join(", "),

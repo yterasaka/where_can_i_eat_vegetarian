@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { MarkerF, InfoWindowF } from "@react-google-maps/api";
+import { IconContext } from "react-icons";
+import { BsStarFill } from "react-icons/bs";
 import Link from "next/link";
 import styles from "./placeinfo.module.css";
 
@@ -37,6 +39,11 @@ export default function PlaceInfo({ businessList }) {
           <div className={styles.infoWindows}>
             <h1>{selected.name}</h1>
             <p className={styles.alias}>{selected.alias}</p>
+            <IconContext.Provider value={{ className: styles.star }}>
+              <p>
+                <BsStarFill /> {selected.rating}
+              </p>
+            </IconContext.Provider>
             <p className={styles.categories}>{selected.categories}</p>
             <p>{selected.location}</p>
             <p>{selected.phone}</p>
