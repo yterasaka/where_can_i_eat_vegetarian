@@ -22,6 +22,12 @@ function Map({ selectedCity, businessList }) {
   useEffect(() => {
     const centerCity = () => {
       switch (selectedCity) {
+        case "Sapporo":
+          setCenter({
+            lat: 43.068661,
+            lng: 141.350755,
+          });
+          break;
         case "Tokyo":
           setCenter({
             lat: 35.681236,
@@ -50,6 +56,12 @@ function Map({ selectedCity, businessList }) {
           setCenter({
             lat: 34.702485,
             lng: 135.495951,
+          });
+          break;
+        case "Fukuoka":
+          setCenter({
+            lat: 33.581322,
+            lng: 130.424997,
           });
           break;
         default:

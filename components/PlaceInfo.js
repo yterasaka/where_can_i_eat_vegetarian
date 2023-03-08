@@ -21,7 +21,7 @@ export default function PlaceInfo({ businessList }) {
             setSelected(marker);
           }}
           icon={{
-            url: "/tomato.svg",
+            url: "/carrot.svg",
           }}
         />
       ))}

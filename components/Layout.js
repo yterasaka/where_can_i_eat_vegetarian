@@ -4,7 +4,15 @@ import styles from "./layout.module.css";
 import { FiGithub, FiLinkedin } from "react-icons/fi";
 
 const Layout = ({ children, selectedCity, setSelectedCity }) => {
-  const cities = ["Tokyo", "Yokohama", "Nagoya", "Kyoto", "Osaka"];
+  const cities = [
+    "Sapporo",
+    "Tokyo",
+    "Yokohama",
+    "Nagoya",
+    "Kyoto",
+    "Osaka",
+    "Fukuoka",
+  ];
   const handleChange = (e) => {
     setSelectedCity(e.target.value);
   };
