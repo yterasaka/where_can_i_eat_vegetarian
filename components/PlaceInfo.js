@@ -18,6 +18,9 @@ export default function PlaceInfo({ businessList }) {
           onClick={() => {
             setSelected(marker);
           }}
+          icon={{
+            url: "/tomato.svg",
+          }}
         />
       ))}
 

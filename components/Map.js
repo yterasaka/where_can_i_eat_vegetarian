@@ -76,10 +76,7 @@ function Map({ selectedCity, businessList }) {
         options={options}
         onLoad={onMapLoad}
       >
-        {
-          // ...Your map components
-          <PlaceInfo businessList={businessList} />
-        }
+        {<PlaceInfo businessList={businessList} />}
       </GoogleMap>
     );
   };

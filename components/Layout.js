@@ -35,10 +35,10 @@ const Layout = ({ children, selectedCity, setSelectedCity }) => {
           <p>?</p>
         </div>
         <div className={styles.link}>
-          <Link href={"/"}>
+          <Link href={"https://github.com/yterasaka"}>
             <FiGithub className={styles.linkButton} />
           </Link>
-          <Link href={"/"}>
+          <Link href={"https://www.linkedin.com/in/yuki-terasaka-a5399b129/"}>
             <FiLinkedin className={styles.linkButton} />
           </Link>
         </div>
