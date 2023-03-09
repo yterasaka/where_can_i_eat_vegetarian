@@ -12,7 +12,7 @@ const Layout = ({ children, selectedCity, setSelectedCity }) => {
   return (
     <div className={styles.container}>
       <header className={styles.header}>
-        <div className={styles.title}>
+        <div className={styles.titleContainer}>
           <Image
             src="/logo.png"
             alt="Logo"
@@ -20,7 +20,7 @@ const Layout = ({ children, selectedCity, setSelectedCity }) => {
             height={30}
             className={styles.logo}
           />
-          <p className={styles.title}>Where Can I Eat Vegetarian in</p>
+          <p className={styles.titleLeft}>Where Can I Eat Vegetarian in</p>
           <select
             className={styles.selecter}
             value={selectedCity}
@@ -32,7 +32,7 @@ const Layout = ({ children, selectedCity, setSelectedCity }) => {
               </option>
             ))}
           </select>
-          <p>?</p>
+          <p className={styles.titleRight}>?</p>
         </div>
         <div className={styles.link}>
           <Link href={"https://github.com/yterasaka"}>
