@@ -18,3 +18,7 @@
   color: var(--darkgreen);
   vertical-align: -1px;
 }
+
+.link {
+  vertical-align: -2px;
+}

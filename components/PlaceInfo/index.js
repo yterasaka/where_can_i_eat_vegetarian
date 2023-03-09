@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { MarkerF, InfoWindowF } from "@react-google-maps/api";
 import { IconContext } from "react-icons";
 import { BsStarFill } from "react-icons/bs";
-import Link from "next/link";
-import styles from "./placeinfo.module.css";
+import { BiLinkExternal } from "react-icons/bi";
+import styles from "./index.module.css";
 
 export default function PlaceInfo({ businessList }) {
   const [selected, setSelected] = useState(null);
@@ -26,7 +26,8 @@ export default function PlaceInfo({ businessList }) {
         />
       ))}
 
-      {selected ? (
+      {/* && で置き換えられる */}
+      {selected && (
         <InfoWindowF
           position={{
             lat: selected.coordinates.latitude,
@@ -47,10 +48,14 @@ export default function PlaceInfo({ businessList }) {
             <p className={styles.categories}>{selected.categories}</p>
             <p>{selected.location}</p>
             <p>{selected.phone}</p>
-            <Link href={selected.url}>Link</Link>
+            <IconContext.Provider value={{ className: styles.link }}>
+              <a href={selected.url} target="blank" rel="noopener noreferrer">
+                Link <BiLinkExternal />
+              </a>
+            </IconContext.Provider>
           </div>
         </InfoWindowF>
-      ) : null}
+      )}
     </>
   );
 }

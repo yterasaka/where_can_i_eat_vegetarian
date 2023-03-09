@@ -5,7 +5,7 @@ import Map from "../components/Map";
 
 export default function Home() {
   const [selectedCity, setSelectedCity] = useState("Tokyo");
-  const [data, setData] = useState(null);
+  const [businessData, setBusinessData] = useState(null);
 
   useEffect(() => {
     const postData = async () => {
@@ -17,16 +17,18 @@ export default function Home() {
         body: JSON.stringify({ selectedCity }),
       })
         .then((response) => response.json())
-        .then((data) => setData(data));
+        .then((data) => {
+          setBusinessData(data);
+          // console.log("data", data); // test
+        });
     };
     postData();
   }, [selectedCity]);
 
-  const dataJson = JSON.parse(data);
-  console.log(dataJson?.jsonBody?.businesses);
+  const dataJson = JSON.parse(businessData);
 
   // オプショナルチェイニング演算子 ?. を使用することで、data が null の場合には処理がスキップされ、エラーが発生しなくなる
-  const businessList = dataJson?.jsonBody?.businesses?.map((business) => {
+  const businessList = dataJson?.map((business) => {
     const businessInfo = {
       id: business.id,
       name: business.name,
@@ -59,11 +61,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <Map
-          selectedCity={selectedCity}
-          data={data}
-          businessList={businessList}
-        />
+        <Map selectedCity={selectedCity} businessList={businessList} />
       </main>
     </Layout>
   );

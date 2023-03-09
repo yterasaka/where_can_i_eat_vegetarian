@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import styles from "./layout.module.css";
+import styles from "./index.module.css";
 import { FiGithub, FiLinkedin } from "react-icons/fi";
 
 const Layout = ({ children, selectedCity, setSelectedCity }) => {
