@@ -2,11 +2,17 @@ import Image from "next/image";
 import Link from "next/link";
 import styles from "./index.module.css";
 import { FiGithub, FiLinkedin } from "react-icons/fi";
+import { useState } from "react";
 
 const Layout = ({ children, selectedCity, setSelectedCity }) => {
+  const [openMenu, setOpenMenu] = useState(false);
   const cities = ["Tokyo", "Yokohama", "Nagoya", "Kyoto", "Osaka"];
   const handleChange = (e) => {
     setSelectedCity(e.target.value);
+  };
+
+  const handleOpen = () => {
+    setOpenMenu(!openMenu);
   };
 
   return (
@@ -33,6 +39,24 @@ const Layout = ({ children, selectedCity, setSelectedCity }) => {
             ))}
           </select>
           <p className={styles.titleRight}>?</p>
+        </div>
+        <div className={styles.dropdown}>
+          <button onClick={handleOpen} className={styles.dropbtn}>
+            Menu
+          </button>
+          {openMenu && (
+            <div className={styles.dropdownContent}>
+              <Link href="#" className={styles.dropdownItem}>
+                About Me
+              </Link>
+              {/* <Link href="#" className={styles.dropdownItem}>
+                My Restaurants
+              </Link> */}
+              <Link href="#" className={styles.dropdownItem}>
+                Log out
+              </Link>
+            </div>
+          )}
         </div>
         <div className={styles.link}>
           <Link href={"https://github.com/yterasaka"}>
