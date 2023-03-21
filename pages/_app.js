@@ -10,6 +10,7 @@ export default function App({ Component, pageProps }) {
     const token = Cookies.get("token");
 
     if (token) {
+      // axiosで書き直す
       fetch(`${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/users/me`, {
         headers: {
           Authorization: `Bearer ${token}`,

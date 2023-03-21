@@ -28,7 +28,7 @@ const Login = () => {
 
   return (
     <div className={styles.formWrapper}>
-      <h1 className={styles.title}>Log in</h1>
+      <h1 className={styles.title}>LOG IN</h1>
       <section className={styles.form}>
         <div className={styles.formItem}>
           <input
@@ -54,7 +54,7 @@ const Login = () => {
           </button>
         </div>
 
-        <div className={styles.formMessage}>
+        <div className={styles.formLinkContainer}>
           <Link href="/forgotten-password">
             <p className={styles.formLink}>Forgot Password?</p>
           </Link>

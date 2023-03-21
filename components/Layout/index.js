@@ -24,9 +24,6 @@ const Layout = ({ children, selectedCity, setSelectedCity }) => {
     window.location.reload();
   };
 
-  console.log(userState);
-  console.log(openMenu);
-
   return (
     <div className={styles.container}>
       <header className={styles.header}>
