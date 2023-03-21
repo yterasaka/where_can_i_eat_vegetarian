@@ -1,0 +1,85 @@
+.formWrapper {
+  position: relative;
+  background-color: var(--white);
+  margin: 100px auto;
+  padding: 0 1em;
+  max-width: 370px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.1), 0 5px 5px 0 rgba(0, 0, 0, 0.14);
+}
+
+.title {
+  color: var(--darkgreen);
+  text-align: center;
+  padding: 1em 0;
+  font-size: 1.8em;
+}
+
+.message {
+  font-size: 1em;
+  color: var(--green);
+  margin-bottom: 2em;
+}
+
+.form {
+  padding: 0 1.5em;
+}
+
+.formItem {
+  margin-bottom: 0.75em;
+  width: 100%;
+}
+
+.itemName {
+  color: var(--green);
+  margin-bottom: 1em;
+  /* border: 1px solid var(--mediumseagreen); */
+}
+
+.itemText {
+  color: var(--darkgray);
+  margin-bottom: 1em;
+}
+
+.formInput {
+  background-color: var(--whitesmoke);
+  border: none;
+  padding: 10px 15px;
+  margin-bottom: 15px;
+}
+
+.formBtn {
+  margin: 0 0 15px;
+  padding: 10px 15px;
+  width: 50%;
+  border: none;
+  border-radius: 5px;
+  background-color: var(--mediumseagreen);
+  color: var(--white);
+  cursor: pointer;
+}
+
+.formBtn:hover {
+  opacity: 0.7;
+  transition: 0.3s;
+}
+
+.editBtn {
+  margin-bottom: 1em;
+  border: none;
+  background-color: var(--white);
+  color: var(--green);
+}
+
+.editBtn:hover {
+  opacity: 0.7;
+}
+
+.formBtnPwd {
+  border: none;
+  background-color: var(--white);
+  color: var(--green);
+  font-size: 0.9em;
+  padding-bottom: 2em;
+}

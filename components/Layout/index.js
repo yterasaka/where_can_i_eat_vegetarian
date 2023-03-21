@@ -57,7 +57,7 @@ const Layout = ({ children, selectedCity, setSelectedCity }) => {
             <div className={styles.dropdownContent}>
               {userState && (
                 <>
-                  <Link href="/account" className={styles.dropdownItem}>
+                  <Link href="/user" className={styles.dropdownItem}>
                     Account
                   </Link>
                   <Link href="favorites" className={styles.dropdownItem}>
