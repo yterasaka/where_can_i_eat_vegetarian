@@ -25,6 +25,7 @@ const Layout = ({ children, selectedCity, setSelectedCity }) => {
   };
 
   console.log(userState);
+  console.log(openMenu);
 
   return (
     <div className={styles.container}>
@@ -57,21 +58,32 @@ const Layout = ({ children, selectedCity, setSelectedCity }) => {
           </button>
           {openMenu && (
             <div className={styles.dropdownContent}>
-              {/* <Link href="favorites" className={styles.dropdownItem}>
-                My Restaurants
-              </Link> */}
-              <Link href="/login" className={styles.dropdownItem}>
-                Log in
-              </Link>
-              <Link href="/register" className={styles.dropdownItem}>
-                Sign in
-              </Link>
-              <Link href="/account" className={styles.dropdownItem}>
-                Account
-              </Link>
-              <button className={styles.dropdownItem} onClick={handleLogout}>
-                Log out
-              </button>
+              {userState && (
+                <>
+                  <Link href="/account" className={styles.dropdownItem}>
+                    Account
+                  </Link>
+                  <Link href="favorites" className={styles.dropdownItem}>
+                    My Restaurants
+                  </Link>
+                  <button
+                    className={styles.dropdownItem}
+                    onClick={handleLogout}
+                  >
+                    Log out
+                  </button>
+                </>
+              )}
+              {!userState && (
+                <>
+                  <Link href="/login" className={styles.dropdownItem}>
+                    Log in
+                  </Link>
+                  <Link href="/register" className={styles.dropdownItem}>
+                    Sign in
+                  </Link>
+                </>
+              )}
             </div>
           )}
         </div>
