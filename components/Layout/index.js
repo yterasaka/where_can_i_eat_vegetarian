@@ -47,7 +47,7 @@ const Layout = ({ children, selectedCity, setSelectedCity }) => {
           {openMenu && (
             <div className={styles.dropdownContent}>
               <Link href="/account" className={styles.dropdownItem}>
-                About Me
+                Account
               </Link>
               {/* <Link href="favorites" className={styles.dropdownItem}>
                 My Restaurants
@@ -60,12 +60,20 @@ const Layout = ({ children, selectedCity, setSelectedCity }) => {
           )}
         </div>
         <div className={styles.link}>
-          <Link href={"https://github.com/yterasaka"}>
+          <a
+            href={"https://github.com/yterasaka"}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <FiGithub className={styles.linkButton} />
-          </Link>
-          <Link href={"https://www.linkedin.com/in/yuki-terasaka-a5399b129/"}>
+          </a>
+          <a
+            href={"https://www.linkedin.com/in/yuki-terasaka-a5399b129/"}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <FiLinkedin className={styles.linkButton} />
-          </Link>
+          </a>
         </div>
       </header>
       <main>{children}</main>
