@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./index.module.css";
-import { FiGithub, FiLinkedin } from "react-icons/fi";
+// import { FiGithub, FiLinkedin } from "react-icons/fi";
 import { useContext, useState } from "react";
 import Cookies from "js-cookie";
 import AppContext from "@/context/AppContext";
@@ -60,9 +60,9 @@ const Layout = ({ children, selectedCity, setSelectedCity }) => {
                   <Link href="/user" className={styles.dropdownItem}>
                     Account
                   </Link>
-                  <Link href="favorites" className={styles.dropdownItem}>
-                    My Restaurants
-                  </Link>
+                  {/* <Link href="favorites" className={styles.dropdownItem}>
+                    Favorites
+                  </Link> */}
                   <button
                     className={styles.dropdownItem}
                     onClick={handleLogout}
@@ -84,7 +84,7 @@ const Layout = ({ children, selectedCity, setSelectedCity }) => {
             </div>
           )}
         </div>
-        <div className={styles.link}>
+        {/* <div className={styles.link}>
           <a
             href={"https://github.com/yterasaka"}
             target="_blank"
@@ -99,7 +99,7 @@ const Layout = ({ children, selectedCity, setSelectedCity }) => {
           >
             <FiLinkedin className={styles.linkButton} />
           </a>
-        </div>
+        </div> */}
       </header>
       <main>{children}</main>
     </div>

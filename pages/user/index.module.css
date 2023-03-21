@@ -83,3 +83,10 @@
   font-size: 0.9em;
   padding-bottom: 2em;
 }
+
+@media screen and (max-width: 640px) {
+  .formWrapper {
+    max-width: 300px;
+    margin: 50px auto;
+  }
+}
