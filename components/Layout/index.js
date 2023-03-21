@@ -46,15 +46,16 @@ const Layout = ({ children, selectedCity, setSelectedCity }) => {
           </button>
           {openMenu && (
             <div className={styles.dropdownContent}>
-              <Link href="#" className={styles.dropdownItem}>
+              <Link href="/account" className={styles.dropdownItem}>
                 About Me
               </Link>
-              {/* <Link href="#" className={styles.dropdownItem}>
+              {/* <Link href="favorites" className={styles.dropdownItem}>
                 My Restaurants
               </Link> */}
-              <Link href="#" className={styles.dropdownItem}>
-                Log out
+              <Link href="/login" className={styles.dropdownItem}>
+                Log in
               </Link>
+              <button className={styles.dropdownItem}>Log out</button>
             </div>
           )}
         </div>
