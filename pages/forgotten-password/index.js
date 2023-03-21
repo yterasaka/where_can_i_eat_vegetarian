@@ -10,6 +10,7 @@ const ForgottenPwd = () => {
   const handleSendEmail = () => {
     sendEmail(email);
     router.push("/");
+    alert("A password reset email has been sent.");
   };
 
   const handleChange = (e) => {
