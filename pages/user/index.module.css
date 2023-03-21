@@ -34,7 +34,6 @@
 .itemName {
   color: var(--green);
   margin-bottom: 1em;
-  /* border: 1px solid var(--mediumseagreen); */
 }
 
 .itemText {
@@ -70,6 +69,7 @@
   border: none;
   background-color: var(--white);
   color: var(--green);
+  font-size: 0.9em;
 }
 
 .editBtn:hover {
