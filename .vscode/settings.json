@@ -5,6 +5,7 @@
     "noopener",
     "noreferrer",
     "Placeinfo",
-    "selecter"
+    "selecter",
+    "STRAPI"
   ]
 }
