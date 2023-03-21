@@ -2,9 +2,12 @@ import Image from "next/image";
 import Link from "next/link";
 import styles from "./index.module.css";
 import { FiGithub, FiLinkedin } from "react-icons/fi";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import Cookies from "js-cookie";
+import AppContext from "@/context/AppContext";
 
 const Layout = ({ children, selectedCity, setSelectedCity }) => {
+  const { userState, setUserState } = useContext(AppContext);
   const [openMenu, setOpenMenu] = useState(false);
   const cities = ["Tokyo", "Yokohama", "Nagoya", "Kyoto", "Osaka"];
   const handleChange = (e) => {
@@ -14,6 +17,14 @@ const Layout = ({ children, selectedCity, setSelectedCity }) => {
   const handleOpen = () => {
     setOpenMenu(!openMenu);
   };
+
+  const handleLogout = () => {
+    Cookies.remove("token");
+    setUserState(null);
+    window.location.reload();
+  };
+
+  console.log(userState);
 
   return (
     <div className={styles.container}>
@@ -46,16 +57,21 @@ const Layout = ({ children, selectedCity, setSelectedCity }) => {
           </button>
           {openMenu && (
             <div className={styles.dropdownContent}>
-              <Link href="/account" className={styles.dropdownItem}>
-                Account
-              </Link>
               {/* <Link href="favorites" className={styles.dropdownItem}>
                 My Restaurants
               </Link> */}
               <Link href="/login" className={styles.dropdownItem}>
                 Log in
               </Link>
-              <button className={styles.dropdownItem}>Log out</button>
+              <Link href="/register" className={styles.dropdownItem}>
+                Sign in
+              </Link>
+              <Link href="/account" className={styles.dropdownItem}>
+                Account
+              </Link>
+              <button className={styles.dropdownItem} onClick={handleLogout}>
+                Log out
+              </button>
             </div>
           )}
         </div>

@@ -10,7 +10,7 @@ export default function App({ Component, pageProps }) {
     const token = Cookies.get("token");
 
     if (token) {
-      fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/users/me`, {
+      fetch(`${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/users/me`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
