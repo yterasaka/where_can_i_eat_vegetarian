@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import styles from "./index.module.css";
 // import { FiGithub, FiLinkedin } from "react-icons/fi";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import Cookies from "js-cookie";
 import AppContext from "@/context/AppContext";
 
@@ -10,6 +10,8 @@ const Layout = ({ children, selectedCity, setSelectedCity }) => {
   const { userState, setUserState } = useContext(AppContext);
   const [openMenu, setOpenMenu] = useState(false);
   const cities = ["Tokyo", "Yokohama", "Nagoya", "Kyoto", "Osaka"];
+  const dropdownRef = useRef(null);
+
   const handleChange = (e) => {
     setSelectedCity(e.target.value);
   };
@@ -23,6 +25,20 @@ const Layout = ({ children, selectedCity, setSelectedCity }) => {
     setUserState(null);
     window.location.reload();
   };
+
+  // ドロップダウンメニュー枠外をクリックしたときにメニューを閉じる
+  const handleClickOutside = (e) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+      setOpenMenu(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside); // クリーンアップ関数
+    };
+  }, []);
 
   return (
     <div className={styles.container}>
@@ -49,7 +65,7 @@ const Layout = ({ children, selectedCity, setSelectedCity }) => {
           </select>
           <p className={styles.titleRight}>?</p>
         </div>
-        <div className={styles.dropdown}>
+        <div className={styles.dropdown} ref={dropdownRef}>
           <button onClick={handleOpen} className={styles.dropbtn}>
             Menu
           </button>
