@@ -6,8 +6,8 @@ import Map from "../components/Map";
 export default function Home() {
   const [selectedCity, setSelectedCity] = useState("Tokyo");
   const [businessData, setBusinessData] = useState(null); // ここに入っているのはJSON文字列
-  // const [showFavorites, setShowFavorites] = useState(false); お気に入りにオンオフの状態
-  // const [favorites, setFavorites] = useState(null); お気に入りのデータを格納　ここのデータが更新されると、バックエンドのデータも更新するようにする
+  const [showFavorites, setShowFavorites] = useState(false); // お気に入りにオンオフの状態
+  const [favorites, setFavorites] = useState(null); // お気に入りのデータを格納　ここのデータが更新されると、バックエンドのデータも更新するようにする
 
   useEffect(() => {
     const postData = async () => {
@@ -52,7 +52,13 @@ export default function Home() {
   });
 
   return (
-    <Layout selectedCity={selectedCity} setSelectedCity={setSelectedCity}>
+    <Layout
+      selectedCity={selectedCity}
+      setSelectedCity={setSelectedCity}
+      showFavorites={showFavorites}
+      setShowFavorites={setShowFavorites}
+      setFavorites={setFavorites}
+    >
       <Head>
         <title>Where Can I Eat Vegetarian?</title>
         <meta

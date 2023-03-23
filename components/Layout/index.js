@@ -2,11 +2,20 @@ import Image from "next/image";
 import Link from "next/link";
 import styles from "./index.module.css";
 // import { FiGithub, FiLinkedin } from "react-icons/fi";
+// import { AiFillHeart, AiTwotoneHeart } from "react-icons/ai";
+import { BsBookmarkHeartFill, BsBookmarkHeart } from "react-icons/bs";
 import { useContext, useEffect, useRef, useState } from "react";
 import Cookies from "js-cookie";
 import AppContext from "@/context/AppContext";
 
-const Layout = ({ children, selectedCity, setSelectedCity }) => {
+const Layout = ({
+  children,
+  selectedCity,
+  setSelectedCity,
+  showFavorites,
+  setShowFavorites,
+  setFavorites,
+}) => {
   const { userState, setUserState } = useContext(AppContext);
   const [openMenu, setOpenMenu] = useState(false);
   const cities = ["Tokyo", "Yokohama", "Nagoya", "Kyoto", "Osaka"];
@@ -26,6 +35,10 @@ const Layout = ({ children, selectedCity, setSelectedCity }) => {
     window.location.reload();
   };
 
+  const handleToggleFavorite = () => {
+    setShowFavorites(!showFavorites);
+  };
+
   // ドロップダウンメニュー枠外をクリックしたときにメニューを閉じる
   const handleClickOutside = (e) => {
     if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
@@ -43,6 +56,7 @@ const Layout = ({ children, selectedCity, setSelectedCity }) => {
   return (
     <div className={styles.container}>
       <header className={styles.header}>
+        {/* 左側の要素 */}
         <div className={styles.titleContainer}>
           <Image
             src="/logo.png"
@@ -65,6 +79,15 @@ const Layout = ({ children, selectedCity, setSelectedCity }) => {
           </select>
           <p className={styles.titleRight}>?</p>
         </div>
+
+        {/* 右側の要素 */}
+        <button className={styles.favoritesBtn} onClick={handleToggleFavorite}>
+          {showFavorites ? (
+            <BsBookmarkHeartFill className={styles.favoritesBtnIconOn} />
+          ) : (
+            <BsBookmarkHeart className={styles.favoritesBtnIconOff} />
+          )}
+        </button>
         <div className={styles.dropdown} ref={dropdownRef}>
           <button onClick={handleOpen} className={styles.dropbtn}>
             Menu
