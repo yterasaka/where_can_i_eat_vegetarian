@@ -57,7 +57,6 @@ export default function Home() {
       setSelectedCity={setSelectedCity}
       showFavorites={showFavorites}
       setShowFavorites={setShowFavorites}
-      setFavorites={setFavorites}
     >
       <Head>
         <title>Where Can I Eat Vegetarian?</title>
@@ -69,7 +68,12 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <Map selectedCity={selectedCity} businessList={businessList} />
+        <Map
+          selectedCity={selectedCity}
+          businessList={businessList}
+          favorites={favorites}
+          setFavorites={setFavorites}
+        />
       </main>
     </Layout>
   );

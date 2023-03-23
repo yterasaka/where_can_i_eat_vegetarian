@@ -14,7 +14,6 @@ const Layout = ({
   setSelectedCity,
   showFavorites,
   setShowFavorites,
-  setFavorites,
 }) => {
   const { userState, setUserState } = useContext(AppContext);
   const [openMenu, setOpenMenu] = useState(false);
@@ -99,9 +98,6 @@ const Layout = ({
                   <Link href="/user" className={styles.dropdownItem}>
                     Account
                   </Link>
-                  {/* <Link href="favorites" className={styles.dropdownItem}>
-                    Favorites
-                  </Link> */}
                   <button
                     className={styles.dropdownItem}
                     onClick={handleLogout}
