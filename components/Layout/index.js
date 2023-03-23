@@ -2,7 +2,6 @@ import Image from "next/image";
 import Link from "next/link";
 import styles from "./index.module.css";
 // import { FiGithub, FiLinkedin } from "react-icons/fi";
-// import { AiFillHeart, AiTwotoneHeart } from "react-icons/ai";
 import { BsBookmarkHeartFill, BsBookmarkHeart } from "react-icons/bs";
 import { useContext, useEffect, useRef, useState } from "react";
 import Cookies from "js-cookie";

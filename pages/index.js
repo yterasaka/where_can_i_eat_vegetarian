@@ -1,13 +1,34 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import Head from "next/head";
+// import axios from "axios";
+import Cookies from "js-cookie";
+// import AppContext from "@/context/AppContext";
 import Layout from "../components/Layout";
 import Map from "../components/Map";
+import { getFavorite } from "../lib/favorites";
 
 export default function Home() {
   const [selectedCity, setSelectedCity] = useState("Tokyo");
   const [businessData, setBusinessData] = useState(null); // ここに入っているのはJSON文字列
   const [showFavorites, setShowFavorites] = useState(false); // お気に入りにオンオフの状態
   const [favorites, setFavorites] = useState(null); // お気に入りのデータを格納　ここのデータが更新されると、バックエンドのデータも更新するようにする
+
+  // マウントする度にお気に入りの状態変数を更新
+  useEffect(() => {
+    const token = Cookies.get("token");
+
+    if (token) {
+      fetch(`${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/users/me`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }).then(async (res) => {
+        const user = await res.json();
+        const test = await getFavorite(user.id);
+        setFavorites(test.data.favorite.restaurants);
+      });
+    }
+  }, []);
 
   useEffect(() => {
     const postData = async () => {
@@ -57,6 +78,7 @@ export default function Home() {
       setSelectedCity={setSelectedCity}
       showFavorites={showFavorites}
       setShowFavorites={setShowFavorites}
+      // getFavorite={getFavorite}
     >
       <Head>
         <title>Where Can I Eat Vegetarian?</title>
@@ -72,7 +94,7 @@ export default function Home() {
           selectedCity={selectedCity}
           businessList={businessList}
           favorites={favorites}
-          setFavorites={setFavorites}
+          setFavorites={setFavorites} // Mapにはまだ処理が書いていない
         />
       </main>
     </Layout>
