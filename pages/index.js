@@ -5,7 +5,9 @@ import Map from "../components/Map";
 
 export default function Home() {
   const [selectedCity, setSelectedCity] = useState("Tokyo");
-  const [businessData, setBusinessData] = useState(null);
+  const [businessData, setBusinessData] = useState(null); // ここに入っているのはJSON文字列
+  // const [showFavorites, setShowFavorites] = useState(false); お気に入りにオンオフの状態
+  // const [favorites, setFavorites] = useState(null); お気に入りのデータを格納　ここのデータが更新されると、バックエンドのデータも更新するようにする
 
   useEffect(() => {
     const postData = async () => {
@@ -14,12 +16,11 @@ export default function Home() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ selectedCity }),
+        body: JSON.stringify({ selectedCity }), // 選択した都市の情報をAPIルートに渡す
       })
         .then((response) => response.json())
         .then((data) => {
           setBusinessData(data);
-          // console.log("data", data); // test
         });
     };
     postData();
@@ -28,6 +29,7 @@ export default function Home() {
   const dataJson = JSON.parse(businessData);
 
   // オプショナルチェイニング演算子 ?. を使用することで、data が null の場合には処理がスキップされ、エラーが発生しなくなる
+  // dataJsonの部分を変数にして、お気に入りと入れ替わるようにする。
   const businessList = dataJson?.map((business) => {
     const businessInfo = {
       id: business.id,

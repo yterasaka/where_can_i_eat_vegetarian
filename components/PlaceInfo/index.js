@@ -21,7 +21,7 @@ export default function PlaceInfo({ businessList }) {
             setSelected(marker);
           }}
           icon={{
-            url: "/carrot.svg",
+            url: "/carrot.svg", // この部分だけ、お気に入り表示の時にハートに変化するように変更
           }}
         />
       ))}
