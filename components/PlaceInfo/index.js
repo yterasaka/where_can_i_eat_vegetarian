@@ -9,7 +9,6 @@ import AppContext from "@/context/AppContext";
 
 export default function PlaceInfo({ businessList }) {
   const { favorites, setFavorites } = useContext(AppContext);
-  // const { showFavorites } = useContext(AppContext);
   const [selected, setSelected] = useState(null);
 
   const handleToggleFavorite = (data) => {
@@ -19,10 +18,8 @@ export default function PlaceInfo({ businessList }) {
     }
     const duplicate = favorites.findIndex((item) => item.id === data.id);
     if (duplicate === -1) {
-      // console.log("重複なし");
       setFavorites([...favorites, data]);
     } else {
-      // console.log("重複あり", duplicate);
       setFavorites(favorites.filter((item) => item.id !== data.id));
     }
   };
@@ -83,7 +80,7 @@ export default function PlaceInfo({ businessList }) {
               </IconContext.Provider>
               <button
                 className={styles.favoritesBtn}
-                onClick={() => handleToggleFavorite(selected)} // テスト用。
+                onClick={() => handleToggleFavorite(selected)}
               >
                 {toggleIcon() ? (
                   <BsBookmarkHeartFill className={styles.favoritesBtnIconOn} />
