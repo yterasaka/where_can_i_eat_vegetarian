@@ -11,7 +11,7 @@ import styles from "./index.module.css";
 import AppContext from "@/context/AppContext";
 
 export default function PlaceInfo({ businessList }) {
-  const { favorites, setFavorites } = useContext(AppContext);
+  const { userState, favorites, setFavorites } = useContext(AppContext);
   const [selected, setSelected] = useState(null);
 
   const handleToggleFavorite = (data) => {
@@ -78,17 +78,21 @@ export default function PlaceInfo({ businessList }) {
                   Link <BiLinkExternal />
                 </a>
               </IconContext.Provider>
-              <button
-                className={styles.favoritesBtn}
-                onClick={() => handleToggleFavorite(selected)}
-              >
-                {/* できれば三項演算子で関数は使わない */}
-                {toggleIcon() ? (
-                  <BsBookmarkHeartFill className={styles.favoritesBtnIconOn} />
-                ) : (
-                  <BsBookmarkHeart className={styles.favoritesBtnIconOff} />
-                )}
-              </button>
+              {userState && (
+                <button
+                  className={styles.favoritesBtn}
+                  onClick={() => handleToggleFavorite(selected)}
+                >
+                  {/* できれば三項演算子で関数は使わない */}
+                  {toggleIcon() ? (
+                    <BsBookmarkHeartFill
+                      className={styles.favoritesBtnIconOn}
+                    />
+                  ) : (
+                    <BsBookmarkHeart className={styles.favoritesBtnIconOff} />
+                  )}
+                </button>
+              )}
             </div>
           </div>
         </InfoWindowF>
