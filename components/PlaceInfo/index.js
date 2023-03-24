@@ -1,12 +1,34 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { MarkerF, InfoWindowF } from "@react-google-maps/api";
 import { IconContext } from "react-icons";
 import { BsStarFill } from "react-icons/bs";
 import { BiLinkExternal } from "react-icons/bi";
+import { BsBookmarkHeartFill, BsBookmarkHeart } from "react-icons/bs";
 import styles from "./index.module.css";
+import AppContext from "@/context/AppContext";
 
 export default function PlaceInfo({ businessList }) {
+  const { favorites, setFavorites } = useContext(AppContext);
   const [selected, setSelected] = useState(null);
+
+  const [showFavorites, setShowFavorites] = useState(false); //test
+
+  const handleToggleFavorite = (data) => {
+    setShowFavorites(!showFavorites); // test
+
+    if (!favorites) {
+      setFavorites([data]);
+      return;
+    }
+    const duplicate = favorites.findIndex((item) => item.id === data.id);
+    if (duplicate === -1) {
+      // console.log("重複なし");
+      setFavorites([...favorites, data]);
+    } else {
+      // console.log("重複あり", duplicate);
+      setFavorites(favorites.filter((item) => item.id !== data.id));
+    }
+  };
 
   return (
     <>
@@ -26,7 +48,6 @@ export default function PlaceInfo({ businessList }) {
         />
       ))}
 
-      {/* && で置き換えられる */}
       {selected && (
         <InfoWindowF
           position={{
@@ -48,11 +69,24 @@ export default function PlaceInfo({ businessList }) {
             <p className={styles.categories}>{selected.categories}</p>
             <p>{selected.location}</p>
             <p>{selected.phone}</p>
-            <IconContext.Provider value={{ className: styles.link }}>
-              <a href={selected.url} target="blank" rel="noopener noreferrer">
-                Link <BiLinkExternal />
-              </a>
-            </IconContext.Provider>
+
+            <div className={styles.footer}>
+              <IconContext.Provider value={{ className: styles.link }}>
+                <a href={selected.url} target="blank" rel="noopener noreferrer">
+                  Link <BiLinkExternal />
+                </a>
+              </IconContext.Provider>
+              <button
+                className={styles.favoritesBtn}
+                onClick={() => handleToggleFavorite(selected)} // テスト用。
+              >
+                {showFavorites ? ( // showFavorites はテスト用。favorites 状態変数に格納されているレストランのIDを参照して、一致する場合は表示するという関数を作る
+                  <BsBookmarkHeartFill className={styles.favoritesBtnIconOn} />
+                ) : (
+                  <BsBookmarkHeart className={styles.favoritesBtnIconOff} />
+                )}
+              </button>
+            </div>
           </div>
         </InfoWindowF>
       )}

@@ -2,9 +2,12 @@ import "@/styles/globals.css";
 import AppContext from "@/context/AppContext";
 import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
+import { getFavorite, updateFavorite } from "../lib/favorites";
 
 export default function App({ Component, pageProps }) {
   const [userState, setUserState] = useState(null);
+  const [favorites, setFavorites] = useState([{}]);
+  const [favoritesId, setFavoritesId] = useState(null);
 
   useEffect(() => {
     const token = Cookies.get("token");
@@ -23,12 +26,28 @@ export default function App({ Component, pageProps }) {
         }
         const user = await res.json();
         setUserState(user);
+        const userFavorite = await getFavorite(user.id);
+        setFavorites(userFavorite.data.favorite.restaurants);
+        setFavoritesId(userFavorite.data.favorite.id);
       });
     }
   }, []);
 
+  useEffect(() => {
+    if (favoritesId && favorites) {
+      updateFavorite(favoritesId, favorites);
+    }
+  }, [favoritesId, favorites]);
+
   return (
-    <AppContext.Provider value={{ userState, setUserState }}>
+    <AppContext.Provider
+      value={{
+        userState,
+        setUserState,
+        favorites,
+        setFavorites,
+      }}
+    >
       <Component {...pageProps} />
     </AppContext.Provider>
   );

@@ -1,13 +1,11 @@
 import AppContext from "@/context/AppContext";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import { useContext, useState } from "react";
 import styles from "./index.module.css";
 import { login } from "../../lib/auth";
 import Header from "../../components/Header";
 
 const Login = () => {
-  const router = useRouter();
   const { setUserState } = useContext(AppContext);
   const [loginData, setLoginData] = useState({ identifier: "", password: "" });
 
@@ -15,7 +13,7 @@ const Login = () => {
     login(loginData.identifier, loginData.password)
       .then((res) => {
         setUserState(res.data.user);
-        router.push("/");
+        window.location.replace("/");
       })
       .catch((err) => {
         console.log(err);
@@ -38,7 +36,7 @@ const Login = () => {
               className={styles.formInput}
               type="email"
               name="identifier"
-              placeholder="Email"
+              placeholder="Username or Email"
               onChange={handleChange}
             />
           </div>

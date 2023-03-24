@@ -1,5 +1,4 @@
 import AppContext from "@/context/AppContext";
-import Link from "next/link";
 import { useContext, useState } from "react";
 import styles from "./index.module.css";
 import { changeUserInfo, changePwd } from "../../lib/auth";

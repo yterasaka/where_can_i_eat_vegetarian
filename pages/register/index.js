@@ -1,5 +1,4 @@
 import AppContext from "@/context/AppContext";
-import { useRouter } from "next/router";
 import { useContext, useState } from "react";
 import styles from "./index.module.css";
 import { registerUser } from "../../lib/auth";
@@ -7,7 +6,6 @@ import { postFavorite } from "@/lib/favorites";
 import Header from "../../components/Header";
 
 const Register = () => {
-  const router = useRouter();
   const { setUserState } = useContext(AppContext);
   const [registerData, setRegisterData] = useState({
     username: "",
@@ -24,7 +22,7 @@ const Register = () => {
       .then((res) => {
         setUserState(res.data.user);
         postFavorite(res.data.user.id);
-        router.push("/");
+        window.location.replace("/");
       })
       .catch((err) => console.log(err));
   };
