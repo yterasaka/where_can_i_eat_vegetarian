@@ -8,6 +8,7 @@ export default function App({ Component, pageProps }) {
   const [userState, setUserState] = useState(null);
   const [favorites, setFavorites] = useState([{}]);
   const [favoritesId, setFavoritesId] = useState(null);
+  const [showFavorites, setShowFavorites] = useState(false);
 
   useEffect(() => {
     const token = Cookies.get("token");
@@ -46,6 +47,8 @@ export default function App({ Component, pageProps }) {
         setUserState,
         favorites,
         setFavorites,
+        showFavorites,
+        setShowFavorites,
       }}
     >
       <Component {...pageProps} />
