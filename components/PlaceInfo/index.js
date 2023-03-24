@@ -1,9 +1,12 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { MarkerF, InfoWindowF } from "@react-google-maps/api";
 import { IconContext } from "react-icons";
-import { BsStarFill } from "react-icons/bs";
 import { BiLinkExternal } from "react-icons/bi";
-import { BsBookmarkHeartFill, BsBookmarkHeart } from "react-icons/bs";
+import {
+  BsStarFill,
+  BsBookmarkHeartFill,
+  BsBookmarkHeart,
+} from "react-icons/bs";
 import styles from "./index.module.css";
 import AppContext from "@/context/AppContext";
 
@@ -12,10 +15,6 @@ export default function PlaceInfo({ businessList }) {
   const [selected, setSelected] = useState(null);
 
   const handleToggleFavorite = (data) => {
-    if (!favorites) {
-      setFavorites([data]);
-      return;
-    }
     const duplicate = favorites.findIndex((item) => item.id === data.id);
     if (duplicate === -1) {
       setFavorites([...favorites, data]);
@@ -25,6 +24,7 @@ export default function PlaceInfo({ businessList }) {
   };
 
   // favorite に追加されているレストランのハートマークをピンクにする
+  // TODO: useStateを使って書き直す
   const toggleIcon = () => {
     if (selected) {
       const toggle = favorites.some((item) => item.id === selected.id);
@@ -82,6 +82,7 @@ export default function PlaceInfo({ businessList }) {
                 className={styles.favoritesBtn}
                 onClick={() => handleToggleFavorite(selected)}
               >
+                {/* できれば三項演算子で関数は使わない */}
                 {toggleIcon() ? (
                   <BsBookmarkHeartFill className={styles.favoritesBtnIconOn} />
                 ) : (

@@ -8,8 +8,8 @@ import Cookies from "js-cookie";
 import AppContext from "@/context/AppContext";
 
 const Layout = ({ children, selectedCity, setSelectedCity }) => {
-  const { userState, setUserState } = useContext(AppContext);
-  const { showFavorites, setShowFavorites } = useContext(AppContext);
+  const { userState, setUserState, showFavorites, setShowFavorites } =
+    useContext(AppContext);
   const [openMenu, setOpenMenu] = useState(false);
   const cities = ["Tokyo", "Yokohama", "Nagoya", "Kyoto", "Osaka"];
   const dropdownRef = useRef(null);

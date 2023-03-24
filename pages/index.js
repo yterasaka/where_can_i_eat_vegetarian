@@ -6,9 +6,8 @@ import AppContext from "@/context/AppContext";
 
 export default function Home() {
   const [selectedCity, setSelectedCity] = useState("Tokyo");
-  const [businessData, setBusinessData] = useState(null); // ここに入っているのはJSON文字列
-  const { favorites } = useContext(AppContext);
-  const { showFavorites } = useContext(AppContext);
+  const [businessData, setBusinessData] = useState(null);
+  const { favorites, showFavorites } = useContext(AppContext);
 
   useEffect(() => {
     const postData = async () => {
@@ -27,7 +26,7 @@ export default function Home() {
     postData();
   }, [selectedCity]);
 
-  const dataJson = () => {
+  const showedRestaurants = () => {
     if (showFavorites) {
       return favorites;
     } else {
@@ -36,8 +35,7 @@ export default function Home() {
   };
 
   // オプショナルチェイニング演算子 ?. を使用することで、data が null の場合には処理がスキップされ、エラーが発生しなくなる
-  // dataJsonの部分を変数にして、お気に入りと入れ替わるようにする。
-  const businessList = dataJson()?.map((business) => {
+  const businessList = showedRestaurants()?.map((business) => {
     const businessInfo = {
       id: business.id,
       name: business.name,
