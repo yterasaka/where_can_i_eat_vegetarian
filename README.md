@@ -4,7 +4,7 @@ Portfolio Project
 
 This web application allows you to find restaurants in Japan that serve vegetarian dishes on a map.
 
-Demo: https://where-can-i-eat-vetetarian.vercel.app/
+Demo: https://where-can-i-eat-vegetarian.vercel.app/
 
 ![Where Can I Eat Vegetarian?](/public/image/where_can_i_eat_vegetarian_1.png)
 ![Where Can I Eat Vegetarian?](/public/image/where_can_i_eat_vegetarian_2.png)
@@ -19,8 +19,6 @@ Demo: https://where-can-i-eat-vetetarian.vercel.app/
 
 - Next.js
 - JavaScript
-- HTML
-- CSS
 - Google Maps API
 - Yelp API
 - Strapi
