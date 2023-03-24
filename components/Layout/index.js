@@ -28,6 +28,7 @@ const Layout = ({ children, selectedCity, setSelectedCity }) => {
     window.location.reload();
   };
 
+  // 地図のお気に入り表示を切り替える
   const handleToggleFavorite = () => {
     setShowFavorites(!showFavorites);
   };
@@ -74,13 +75,18 @@ const Layout = ({ children, selectedCity, setSelectedCity }) => {
         </div>
 
         {/* 右側の要素 */}
-        <button className={styles.favoritesBtn} onClick={handleToggleFavorite}>
-          {showFavorites ? (
-            <BsBookmarkHeartFill className={styles.favoritesBtnIconOn} />
-          ) : (
-            <BsBookmarkHeart className={styles.favoritesBtnIconOff} />
-          )}
-        </button>
+        {userState && (
+          <button
+            className={styles.favoritesBtn}
+            onClick={handleToggleFavorite}
+          >
+            {showFavorites ? (
+              <BsBookmarkHeartFill className={styles.favoritesBtnIconOn} />
+            ) : (
+              <BsBookmarkHeart className={styles.favoritesBtnIconOff} />
+            )}
+          </button>
+        )}
         <div className={styles.dropdown} ref={dropdownRef}>
           <button onClick={handleOpen} className={styles.dropbtn}>
             Menu

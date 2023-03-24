@@ -9,6 +9,7 @@ import AppContext from "@/context/AppContext";
 
 export default function PlaceInfo({ businessList }) {
   const { favorites, setFavorites } = useContext(AppContext);
+  // const { showFavorites } = useContext(AppContext);
   const [selected, setSelected] = useState(null);
 
   const handleToggleFavorite = (data) => {
@@ -47,7 +48,7 @@ export default function PlaceInfo({ businessList }) {
             setSelected(marker);
           }}
           icon={{
-            url: "/carrot.svg", // この部分だけ、お気に入り表示の時にハートに変化するように変更
+            url: "/carrot.svg",
           }}
         />
       ))}
