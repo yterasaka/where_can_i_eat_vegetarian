@@ -6,7 +6,7 @@ import Map from "../components/Map";
 export default function Home() {
   const [selectedCity, setSelectedCity] = useState("Tokyo");
   const [businessData, setBusinessData] = useState(null); // ここに入っているのはJSON文字列
-  const [showFavorites, setShowFavorites] = useState(false); // お気に入りにオンオフの状態
+  // const [showFavorites, setShowFavorites] = useState(false); // お気に入りにオンオフの状態
   // const { favorites, setFavorites } = useContext(AppContext);
   // console.log(favorites);
 
@@ -75,8 +75,8 @@ export default function Home() {
     <Layout
       selectedCity={selectedCity}
       setSelectedCity={setSelectedCity}
-      showFavorites={showFavorites}
-      setShowFavorites={setShowFavorites}
+      // showFavorites={showFavorites}
+      // setShowFavorites={setShowFavorites}
     >
       <Head>
         <title>Where Can I Eat Vegetarian?</title>

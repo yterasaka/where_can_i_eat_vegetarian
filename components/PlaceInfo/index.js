@@ -11,11 +11,7 @@ export default function PlaceInfo({ businessList }) {
   const { favorites, setFavorites } = useContext(AppContext);
   const [selected, setSelected] = useState(null);
 
-  const [showFavorites, setShowFavorites] = useState(false); //test
-
   const handleToggleFavorite = (data) => {
-    setShowFavorites(!showFavorites); // test
-
     if (!favorites) {
       setFavorites([data]);
       return;
@@ -27,6 +23,14 @@ export default function PlaceInfo({ businessList }) {
     } else {
       // console.log("重複あり", duplicate);
       setFavorites(favorites.filter((item) => item.id !== data.id));
+    }
+  };
+
+  // favorite に追加されているレストランのハートマークをピンクにする
+  const toggleIcon = () => {
+    if (selected) {
+      const toggle = favorites.some((item) => item.id === selected.id);
+      return toggle;
     }
   };
 
@@ -80,7 +84,7 @@ export default function PlaceInfo({ businessList }) {
                 className={styles.favoritesBtn}
                 onClick={() => handleToggleFavorite(selected)} // テスト用。
               >
-                {showFavorites ? ( // showFavorites はテスト用。favorites 状態変数に格納されているレストランのIDを参照して、一致する場合は表示するという関数を作る
+                {toggleIcon() ? (
                   <BsBookmarkHeartFill className={styles.favoritesBtnIconOn} />
                 ) : (
                   <BsBookmarkHeart className={styles.favoritesBtnIconOff} />
