@@ -1,6 +1,7 @@
 import React, { useRef, useCallback, useState, useEffect } from "react";
 import { GoogleMap, useJsApiLoader } from "@react-google-maps/api";
-import PlaceInfo from "./PlaceInfo";
+import PlaceInfo from "../PlaceInfo";
+import { locations } from "@/utils/constants";
 
 // 地図の大きさを指定
 const containerStyle = {
@@ -20,46 +21,7 @@ function Map({ selectedCity, businessList }) {
   const [center, setCenter] = useState("");
 
   useEffect(() => {
-    const centerCity = () => {
-      switch (selectedCity) {
-        case "Tokyo":
-          setCenter({
-            lat: 35.681236,
-            lng: 139.767125,
-          });
-          break;
-        case "Yokohama":
-          setCenter({
-            lat: 35.465981,
-            lng: 139.622062,
-          });
-          break;
-        case "Nagoya":
-          setCenter({
-            lat: 35.170915,
-            lng: 136.881537,
-          });
-          break;
-        case "Kyoto":
-          setCenter({
-            lat: 34.985849,
-            lng: 135.758767,
-          });
-          break;
-        case "Osaka":
-          setCenter({
-            lat: 34.702485,
-            lng: 135.495951,
-          });
-          break;
-        default:
-          setCenter({
-            lat: 35.681236,
-            lng: 139.767125,
-          });
-      }
-    };
-    centerCity();
+    setCenter(locations[selectedCity]);
   }, [selectedCity]);
 
   const mapRef = useRef();

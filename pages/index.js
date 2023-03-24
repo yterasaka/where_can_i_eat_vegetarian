@@ -1,11 +1,14 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import Head from "next/head";
 import Layout from "../components/Layout";
 import Map from "../components/Map";
+import AppContext from "@/context/AppContext";
 
 export default function Home() {
   const [selectedCity, setSelectedCity] = useState("Tokyo");
-  const [data, setData] = useState(null);
+  const [businessData, setBusinessData] = useState(null); // ここに入っているのはJSON文字列
+  const { favorites } = useContext(AppContext);
+  const { showFavorites } = useContext(AppContext);
 
   useEffect(() => {
     const postData = async () => {
@@ -14,33 +17,43 @@ export default function Home() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ selectedCity }),
+        body: JSON.stringify({ selectedCity }), // 選択した都市の情報をAPIルートに渡す
       })
         .then((response) => response.json())
-        .then((data) => setData(data));
+        .then((data) => {
+          setBusinessData(data);
+        });
     };
     postData();
   }, [selectedCity]);
 
-  const dataJson = JSON.parse(data);
-  console.log(dataJson?.jsonBody?.businesses);
+  const dataJson = () => {
+    if (showFavorites) {
+      return favorites;
+    } else {
+      return JSON.parse(businessData);
+    }
+  };
 
   // オプショナルチェイニング演算子 ?. を使用することで、data が null の場合には処理がスキップされ、エラーが発生しなくなる
-  const businessList = dataJson?.jsonBody?.businesses?.map((business) => {
+  // dataJsonの部分を変数にして、お気に入りと入れ替わるようにする。
+  const businessList = dataJson()?.map((business) => {
     const businessInfo = {
       id: business.id,
       name: business.name,
       alias: business.alias,
       rating: business.rating,
       price: business.price,
-      categories: business.categories
-        .map((category) => category.title)
-        .join(", "),
+      categories: showFavorites
+        ? business.categories
+        : business.categories.map((category) => category.title).join(", "),
       coordinates: {
         latitude: business.coordinates.latitude,
         longitude: business.coordinates.longitude,
       },
-      location: business.location.display_address.join(", "),
+      location: showFavorites
+        ? business.location
+        : business.location.display_address.join(", "),
       phone: business.phone,
       url: business.url,
     };
@@ -59,11 +72,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <Map
-          selectedCity={selectedCity}
-          data={data}
-          businessList={businessList}
-        />
+        <Map selectedCity={selectedCity} businessList={businessList} />
       </main>
     </Layout>
   );

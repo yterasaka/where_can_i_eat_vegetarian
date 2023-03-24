@@ -15,7 +15,7 @@ export default function handler(req, res) {
   client
     .search(searchRequest)
     .then((response) => {
-      const prettyJson = JSON.stringify(response, null, 4);
+      const prettyJson = JSON.stringify(response.jsonBody.businesses, null, 4);
       // console.log(prettyJson);
       res.status(200).json(prettyJson);
     })
