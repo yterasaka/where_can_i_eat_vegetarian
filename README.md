@@ -22,6 +22,8 @@ Demo: https://where-can-i-eat-vegetarian.vercel.app/
 - Google Maps API
 - Yelp API
 - Strapi
+- Vercel
+- Railway
 
 # License
 
