@@ -3,6 +3,7 @@ import { useContext, useState } from "react";
 import styles from "./index.module.css";
 import { changeUserInfo, changePwd } from "../../lib/auth";
 import Header from "../../components/Header";
+import { deleteUser } from "../../lib/auth";
 
 const UserInfo = () => {
   const { userState, setUserState } = useContext(AppContext);
@@ -68,6 +69,16 @@ const UserInfo = () => {
         setIsPwd(false);
       })
       .catch((err) => console.log(err));
+  };
+
+  // ユーザーの削除
+  const handleDelete = () => {
+    if (window.confirm("Do you really want to delete your account?")) {
+      deleteUser(userState.user.id);
+      Cookies.remove("token");
+      setUserState(null);
+      window.location.reload();
+    }
   };
 
   return (
@@ -167,6 +178,11 @@ const UserInfo = () => {
               Change password?
             </button>
           )}
+        </div>
+        <div>
+          <button className={styles.deleteBtn} onClick={handleDelete}>
+            Delete account
+          </button>
         </div>
       </div>
     </div>

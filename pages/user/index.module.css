@@ -70,6 +70,7 @@
   background-color: var(--white);
   color: var(--green);
   font-size: 0.9em;
+  cursor: pointer;
 }
 
 .editBtn:hover {
@@ -82,6 +83,24 @@
   color: var(--green);
   font-size: 0.9em;
   padding-bottom: 2em;
+  cursor: pointer;
+}
+
+.formBtnPwd:hover {
+  opacity: 0.7;
+}
+
+.deleteBtn {
+  margin-bottom: 2em;
+  border: none;
+  background-color: var(--white);
+  color: var(--gray);
+  font-size: 0.8em;
+  cursor: pointer;
+}
+
+.deleteBtn:hover {
+  color: var(--palevioletred);
 }
 
 @media screen and (max-width: 640px) {
