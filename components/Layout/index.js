@@ -98,6 +98,9 @@ const Layout = ({ children, selectedCity, setSelectedCity }) => {
                   <Link href="/user" className={styles.dropdownItem}>
                     Account
                   </Link>
+                  <Link href="/about" className={styles.dropdownItem}>
+                    About
+                  </Link>
                   <button
                     className={styles.dropdownItem}
                     onClick={handleLogout}
@@ -113,6 +116,9 @@ const Layout = ({ children, selectedCity, setSelectedCity }) => {
                   </Link>
                   <Link href="/register" className={styles.dropdownItem}>
                     Sign in
+                  </Link>
+                  <Link href="/about" className={styles.dropdownItem}>
+                    About
                   </Link>
                 </>
               )}

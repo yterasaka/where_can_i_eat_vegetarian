@@ -1,0 +1,38 @@
+.container {
+  color: var(--darkgray);
+  width: 600px;
+  margin: 30px auto;
+  padding: 50px;
+  background-color: var(--ghostwhite);
+  border-radius: 10px;
+}
+
+.title {
+  font-size: 1.4rem;
+  margin-bottom: 20px;
+}
+
+.paragraph {
+  margin-bottom: 30px;
+}
+
+.listTitle {
+  margin-bottom: 10px;
+}
+
+.list {
+  margin-bottom: 30px;
+}
+
+.listItem {
+  list-style: none;
+}
+
+@media screen and (max-width: 640px) {
+  .container {
+    margin: 0;
+    border-radius: 0;
+    width: 100svw;
+    height: 100%;
+  }
+}
