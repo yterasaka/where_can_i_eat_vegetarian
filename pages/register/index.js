@@ -25,43 +25,37 @@ const Register = () => {
   const email = watch("email");
 
   useEffect(() => {
-    const result = async () => {
-      const result = await checkUsername(username).then((res) => {
+    (async () => {
+      await checkUsername(username).then((res) => {
         if (res.length) {
           setIsUsernameValid(true);
         } else {
           setIsUsernameValid(false);
         }
       });
-    };
-    result();
+    })();
   }, [username]);
 
   useEffect(() => {
-    const result = async () => {
-      const result = await checkEmail(email).then((res) => {
+    (async () => {
+      await checkEmail(email).then((res) => {
         if (res.length) {
           setIsEmailValid(true);
         } else {
           setIsEmailValid(false);
         }
       });
-    };
-    result();
+    })();
   }, [email]);
 
   const handleRegister = (data) => {
-    console.log("name", data.username);
-    console.log("email", data.email);
-    console.log("password", data.password);
-
     registerUser(data.username, data.email, data.password)
       .then((res) => {
         setUserState(res.data.user);
         postFavorite(res.data.user.id);
         window.location.replace("/");
       })
-      .catch((err) => console.log(err.response.data.error.message));
+      .catch((err) => console.log(err));
   };
 
   return (

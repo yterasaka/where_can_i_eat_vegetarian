@@ -74,7 +74,6 @@ const UserInfo = () => {
 
   // ユーザーの削除
   const handleDelete = () => {
-    console.log(userState.id);
     if (window.confirm("Do you really want to delete your account?")) {
       deleteUser(userState.id);
       Cookies.remove("token");

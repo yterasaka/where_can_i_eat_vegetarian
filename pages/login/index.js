@@ -13,7 +13,6 @@ const Login = () => {
   const handleLogin = () => {
     login(loginData.identifier, loginData.password)
       .then((res) => {
-        setIsInputValid(false);
         setUserState(res.data.user);
         window.location.replace("/");
       })
