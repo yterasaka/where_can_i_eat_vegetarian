@@ -1,6 +1,6 @@
 import AppContext from "@/context/AppContext";
 import { useContext, useEffect, useState } from "react";
-// import { useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import styles from "./index.module.css";
 import { registerUser, checkUsername, checkEmail } from "../../lib/auth";
 import { postFavorite } from "@/lib/favorites";
@@ -8,27 +8,21 @@ import Header from "../../components/Header";
 
 const Register = () => {
   const { setUserState } = useContext(AppContext);
-  const [registerData, setRegisterData] = useState({
+  const [isUsernameValid, setIsUsernameValid] = useState(false);
+  const [isEmailValid, setIsEmailValid] = useState(false);
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm({
     username: "",
     email: "",
     password: "",
   });
-  const [isUsernameValid, setIsUsernameValid] = useState(false);
-  const [isEmailValid, setIsEmailValid] = useState(false);
 
-  // const {
-  //   register,
-  //   handleSubmit,
-  //   watch,
-  //   formState: { errors },
-  // } = useForm();
-
-  // const username = watch("username");
-  // console.log(username);
-
-  console.log(registerData.username);
-  const username = registerData.username;
-  const email = registerData.email;
+  const username = watch("username");
+  const email = watch("email");
 
   useEffect(() => {
     const result = async () => {
@@ -56,12 +50,12 @@ const Register = () => {
     result();
   }, [email]);
 
-  const handleRegister = () => {
-    registerUser(
-      registerData.username,
-      registerData.email,
-      registerData.password
-    )
+  const handleRegister = (data) => {
+    console.log("name", data.username);
+    console.log("email", data.email);
+    console.log("password", data.password);
+
+    registerUser(data.username, data.email, data.password)
       .then((res) => {
         setUserState(res.data.user);
         postFavorite(res.data.user.id);
@@ -70,59 +64,79 @@ const Register = () => {
       .catch((err) => console.log(err.response.data.error.message));
   };
 
-  const handleChange = (e) => {
-    console.log("test");
-    setRegisterData({ ...registerData, [e.target.name]: e.target.value });
-  };
-
   return (
     <div>
       <Header />
       <div className={styles.formWrapper}>
         <h1 className={styles.title}>SIGN UP</h1>
-        <section className={styles.form}>
+        <form className={styles.form} onSubmit={handleSubmit(handleRegister)}>
           <div className={styles.formItem}>
             <input
               className={styles.formInput}
-              type="name"
               name="username"
-              placeholder="Username"
-              onChange={handleChange}
-              // {...register("username")}
+              placeholder="username"
+              {...register("username", {
+                required: "Please enter your name",
+                minLength: {
+                  value: 3,
+                  message: "Please enter at least 3 characters.",
+                },
+              })}
             />
             {isUsernameValid && (
               <p className={styles.errorMessage}>
                 Username already exists. Please try another username.
               </p>
             )}
+            {errors.username && (
+              <p className={styles.errorMessage}>{errors.username?.message}</p>
+            )}
           </div>
           <div className={styles.formItem}>
             <input
               className={styles.formInput}
-              type="email"
               name="email"
-              placeholder="Email"
-              onChange={handleChange}
+              placeholder="your@example.com"
+              {...register("email", {
+                required: "Please enter your email address",
+                pattern: {
+                  value:
+                    /([a-zA-Z0-9\+_\-]+)(\.[a-zA-Z0-9\+_\-]+)*@([a-zA-Z0-9\-]+\.)+[a-zA-Z]{2,6}/,
+                  message: "Invalid email address",
+                },
+              })}
             />
             {isEmailValid && (
               <p className={styles.errorMessage}>
                 Email already exists. Please try another email.
               </p>
             )}
+            {errors.email && (
+              <p className={styles.errorMessage}>{errors.email?.message}</p>
+            )}
           </div>
           <div className={styles.formItem}>
             <input
               className={styles.formInput}
-              type="password"
               name="password"
-              placeholder="Password"
-              onChange={handleChange}
+              placeholder="password"
+              {...register("password", {
+                required: "Please enter your password",
+                pattern: {
+                  value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/,
+                  message:
+                    "The password must be at least 6 characters long and contain at least one letter and one number.",
+                },
+              })}
             />
+            {errors.password && (
+              <p className={styles.errorMessage}>{errors.password?.message}</p>
+            )}
           </div>
           <button className={styles.formBtn} onClick={handleRegister}>
             Register
           </button>
-        </section>
+        </form>
       </div>
     </div>
   );
