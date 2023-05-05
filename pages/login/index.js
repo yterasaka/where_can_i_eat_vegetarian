@@ -8,16 +8,17 @@ import Header from "../../components/Header";
 const Login = () => {
   const { setUserState } = useContext(AppContext);
   const [loginData, setLoginData] = useState({ identifier: "", password: "" });
+  const [isInputValid, setIsInputValid] = useState(false);
 
   const handleLogin = () => {
     login(loginData.identifier, loginData.password)
       .then((res) => {
+        setIsInputValid(false);
         setUserState(res.data.user);
         window.location.replace("/");
       })
       .catch((err) => {
-        console.log(err);
-        alert("Incorrect email address or password.");
+        setIsInputValid(true);
       });
   };
 
@@ -49,6 +50,11 @@ const Login = () => {
               onChange={handleChange}
             />
           </div>
+          {isInputValid && (
+            <p className={styles.errorMessage}>
+              Incorrect username, email, or password. Please try again.
+            </p>
+          )}
           <div>
             <button className={styles.formBtn} onClick={handleLogin}>
               Login

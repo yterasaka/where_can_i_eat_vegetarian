@@ -30,6 +30,7 @@
   border: none;
   padding: 10px 15px;
   margin-bottom: 15px;
+  width: 100%;
 }
 
 .formBtn {
@@ -55,6 +56,13 @@
 .formLink {
   margin-bottom: 0.5em;
   font-size: 0.9em;
+}
+
+.errorMessage {
+  color: var(--palevioletred);
+  font-size: 0.9rem;
+  text-align: left;
+  margin: 0 10px 20px;
 }
 
 @media screen and (max-width: 640px) {

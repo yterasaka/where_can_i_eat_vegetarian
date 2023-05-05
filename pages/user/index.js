@@ -1,6 +1,7 @@
 import AppContext from "@/context/AppContext";
 import { useContext, useState } from "react";
 import styles from "./index.module.css";
+import Cookies from "js-cookie";
 import { changeUserInfo, changePwd } from "../../lib/auth";
 import Header from "../../components/Header";
 import { deleteUser } from "../../lib/auth";
@@ -73,11 +74,12 @@ const UserInfo = () => {
 
   // ユーザーの削除
   const handleDelete = () => {
+    console.log(userState.id);
     if (window.confirm("Do you really want to delete your account?")) {
-      deleteUser(userState.user.id);
+      deleteUser(userState.id);
       Cookies.remove("token");
       setUserState(null);
-      window.location.reload();
+      window.location.replace("/");
     }
   };
 
