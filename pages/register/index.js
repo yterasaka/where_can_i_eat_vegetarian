@@ -162,12 +162,12 @@ const Register = () => {
             <span onClick={togglePassword} className={styles.passwordReveal}>
               {passwordType === "password" && (
                 <i>
-                  <HiOutlineEye className={styles.passwordIcon} />
+                  <HiOutlineEyeOff className={styles.passwordIcon} />
                 </i>
               )}
               {passwordType === "text" && (
                 <i className="passwordIcon">
-                  <HiOutlineEyeOff className={styles.passwordIcon} />
+                  <HiOutlineEye className={styles.passwordIcon} />
                 </i>
               )}
             </span>
