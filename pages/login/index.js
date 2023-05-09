@@ -1,17 +1,22 @@
 import AppContext from "@/context/AppContext";
 import Link from "next/link";
 import { useContext, useState } from "react";
+import { useForm } from "react-hook-form";
 import styles from "./index.module.css";
 import { login } from "../../lib/auth";
 import Header from "../../components/Header";
 
 const Login = () => {
   const { setUserState } = useContext(AppContext);
-  const [loginData, setLoginData] = useState({ identifier: "", password: "" });
+  const { register, handleSubmit } = useForm({
+    identifier: "",
+    password: "",
+  });
   const [isInputValid, setIsInputValid] = useState(false);
+  const [composing, setComposing] = useState(false);
 
-  const handleLogin = () => {
-    login(loginData.identifier, loginData.password)
+  const handleLogin = (data) => {
+    login(data.identifier, data.password)
       .then((res) => {
         setUserState(res.data.user);
         window.location.replace("/");
@@ -21,8 +26,18 @@ const Login = () => {
       });
   };
 
-  const handleChange = (e) => {
-    setLoginData({ ...loginData, [e.target.name]: e.target.value });
+  const startComposition = () => setComposing(true);
+  const endComposition = () => setComposing(false);
+
+  const onKeydown = (key) => {
+    switch (key) {
+      case "Enter":
+        if (composing) break;
+        handleSubmit(handleLogin);
+        break;
+      default:
+        break;
+    }
   };
 
   return (
@@ -30,23 +45,27 @@ const Login = () => {
       <Header />
       <div className={styles.formWrapper}>
         <h1 className={styles.title}>LOG IN</h1>
-        <section className={styles.form}>
+        <form className={styles.form} onSubmit={handleSubmit(handleLogin)}>
           <div className={styles.formItem}>
             <input
               className={styles.formInput}
-              type="email"
               name="identifier"
               placeholder="Username or Email"
-              onChange={handleChange}
+              onKeyDown={(e) => onKeydown(e.key)}
+              onCompositionStart={startComposition}
+              onCompositionEnd={endComposition}
+              {...register("identifier")}
             />
           </div>
           <div className={styles.formItem}>
             <input
               className={styles.formInput}
-              type="password"
               name="password"
               placeholder="Password"
-              onChange={handleChange}
+              onKeyDown={(e) => onKeydown(e.key)}
+              onCompositionStart={startComposition}
+              onCompositionEnd={endComposition}
+              {...register("password")}
             />
           </div>
           {isInputValid && (
@@ -68,7 +87,7 @@ const Login = () => {
               <p className={styles.formLink}>Don&apos;t have an account yet?</p>
             </Link>
           </div>
-        </section>
+        </form>
       </div>
     </div>
   );
