@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import styles from "./index.module.css";
+import { HiOutlineEye, HiOutlineEyeOff } from "react-icons/hi";
 import { login } from "../../lib/auth";
 import Header from "../../components/Header";
 
@@ -14,6 +15,16 @@ const Login = () => {
   });
   const [isInputValid, setIsInputValid] = useState(false);
   const [composing, setComposing] = useState(false);
+  const [passwordType, setPasswordType] = useState("password");
+
+  const togglePassword = () => {
+    if (passwordType === "password") {
+      setPasswordType("text");
+    }
+    if (passwordType === "text") {
+      setPasswordType("password");
+    }
+  };
 
   const handleLogin = (data) => {
     login(data.identifier, data.password)
@@ -22,6 +33,7 @@ const Login = () => {
         window.location.replace("/");
       })
       .catch((err) => {
+        console.log(err);
         setIsInputValid(true);
       });
   };
@@ -61,22 +73,35 @@ const Login = () => {
             <input
               className={styles.formInput}
               name="password"
+              type={passwordType}
               placeholder="Password"
               onKeyDown={(e) => onKeydown(e.key)}
               onCompositionStart={startComposition}
               onCompositionEnd={endComposition}
               {...register("password")}
             />
+
+            <span onClick={togglePassword} className={styles.passwordReveal}>
+              {passwordType === "password" && (
+                <i>
+                  <HiOutlineEye className={styles.passwordIcon} />
+                </i>
+              )}
+              {passwordType === "text" && (
+                <i className="passwordIcon">
+                  <HiOutlineEyeOff className={styles.passwordIcon} />
+                </i>
+              )}
+            </span>
           </div>
+
           {isInputValid && (
             <p className={styles.errorMessage}>
               Incorrect username, email, or password. Please try again.
             </p>
           )}
           <div>
-            <button className={styles.formBtn} onClick={handleLogin}>
-              Login
-            </button>
+            <input type="submit" value="Login" className={styles.formBtn} />
           </div>
 
           <div className={styles.formLinkContainer}>

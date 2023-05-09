@@ -2,6 +2,7 @@ import AppContext from "@/context/AppContext";
 import { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import styles from "./index.module.css";
+import { HiOutlineEye, HiOutlineEyeOff } from "react-icons/hi";
 import { registerUser, checkUsername, checkEmail } from "../../lib/auth";
 import { postFavorite } from "@/lib/favorites";
 import Header from "../../components/Header";
@@ -21,7 +22,16 @@ const Register = () => {
     password: "",
   });
   const [composing, setComposing] = useState(false);
-  console.log(composing);
+  const [passwordType, setPasswordType] = useState("password");
+
+  const togglePassword = () => {
+    if (passwordType === "password") {
+      setPasswordType("text");
+    }
+    if (passwordType === "text") {
+      setPasswordType("password");
+    }
+  };
 
   const username = watch("username");
   const email = watch("email");
@@ -135,6 +145,7 @@ const Register = () => {
             <input
               className={styles.formInput}
               name="password"
+              type={passwordType}
               placeholder="password"
               onKeyDown={(e) => onKeydown(e.key)}
               onCompositionStart={startComposition}
@@ -148,13 +159,24 @@ const Register = () => {
                 },
               })}
             />
+            <span onClick={togglePassword} className={styles.passwordReveal}>
+              {passwordType === "password" && (
+                <i>
+                  <HiOutlineEye className={styles.passwordIcon} />
+                </i>
+              )}
+              {passwordType === "text" && (
+                <i className="passwordIcon">
+                  <HiOutlineEyeOff className={styles.passwordIcon} />
+                </i>
+              )}
+            </span>
+
             {errors.password && (
               <p className={styles.errorMessage}>{errors.password?.message}</p>
             )}
           </div>
-          <button className={styles.formBtn} onClick={handleRegister}>
-            Register
-          </button>
+          <input type="submit" value="Register" className={styles.formBtn} />
         </form>
       </div>
     </div>

@@ -23,6 +23,7 @@
 .formItem {
   margin-bottom: 0.75em;
   width: 100%;
+  position: relative;
 }
 
 .formInput {
@@ -64,6 +65,18 @@
   font-size: 0.9rem;
   text-align: left;
   margin: 0 10px 20px;
+}
+
+.passwordReveal {
+  left: auto;
+  position: absolute;
+  right: 10px;
+  top: 14px;
+}
+
+.passwordIcon {
+  font-size: 1.2rem;
+  color: var(--gray);
 }
 
 @media screen and (max-width: 640px) {
