@@ -20,6 +20,8 @@ const Register = () => {
     email: "",
     password: "",
   });
+  const [composing, setComposing] = useState(false);
+  console.log(composing);
 
   const username = watch("username");
   const email = watch("email");
@@ -58,6 +60,20 @@ const Register = () => {
       .catch((err) => console.log(err));
   };
 
+  const startComposition = () => setComposing(true);
+  const endComposition = () => setComposing(false);
+
+  const onKeydown = (key) => {
+    switch (key) {
+      case "Enter":
+        if (composing) break;
+        handleSubmit(handleRegister);
+        break;
+      default:
+        break;
+    }
+  };
+
   return (
     <div>
       <Header />
@@ -69,6 +85,9 @@ const Register = () => {
               className={styles.formInput}
               name="username"
               placeholder="username"
+              onKeyDown={(e) => onKeydown(e.key)}
+              onCompositionStart={startComposition}
+              onCompositionEnd={endComposition}
               {...register("username", {
                 required: "Please enter your name",
                 minLength: {
@@ -91,6 +110,9 @@ const Register = () => {
               className={styles.formInput}
               name="email"
               placeholder="your@example.com"
+              onKeyDown={(e) => onKeydown(e.key)}
+              onCompositionStart={startComposition}
+              onCompositionEnd={endComposition}
               {...register("email", {
                 required: "Please enter your email address",
                 pattern: {
@@ -114,6 +136,9 @@ const Register = () => {
               className={styles.formInput}
               name="password"
               placeholder="password"
+              onKeyDown={(e) => onKeydown(e.key)}
+              onCompositionStart={startComposition}
+              onCompositionEnd={endComposition}
               {...register("password", {
                 required: "Please enter your password",
                 pattern: {
