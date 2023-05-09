@@ -42,7 +42,14 @@ const About = () => {
         </ul>
         <p>
           If you have any feedback on the app or features you would like to see
-          added, you can easily submit it using the <a href="#">contact form</a>
+          added, you can easily submit it using the{" "}
+          <a
+            href="https://docs.google.com/forms/d/e/1FAIpQLSew93nbLG10EpF1knb9rG6y9130uyoK2kof5oTtqNlzV1dsdA/viewform?usp=sf_link"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            contact form
+          </a>
           . Your feedback is a valuable resource for me as a developer.
         </p>
       </div>
