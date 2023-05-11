@@ -4,7 +4,6 @@
   top: 100%;
   width: 100%;
   background-color: var(--ghostwhite);
-  font-size: 200px;
   transition: top 0.3s ease-in-out;
   overflow: scroll;
   border-top: 5px solid var(--ghostwhite);
@@ -73,6 +72,8 @@
 
 .categories {
   margin-left: 15px;
+  color: var(--darkgreen);
+  font-size: 0.9rem;
 }
 
 .textS {

@@ -1,14 +1,18 @@
+/* eslint-disable @next/next/no-img-element */
 import React, { useContext, useEffect, useState } from "react";
 import { MarkerF, InfoWindowF } from "@react-google-maps/api";
 import { IconContext } from "react-icons";
 import { BiLinkExternal } from "react-icons/bi";
 import {
   BsStarFill,
+  BsFillHouseHeartFill,
+  BsPhoneFill,
   BsBookmarkHeartFill,
   BsBookmarkHeart,
 } from "react-icons/bs";
 import styles from "./index.module.css";
 import AppContext from "@/context/AppContext";
+import Image from "next/image";
 
 export default function PlaceInfo({ businessList }) {
   const { userState, favorites, setFavorites } = useContext(AppContext);
@@ -61,6 +65,22 @@ export default function PlaceInfo({ businessList }) {
           }}
         >
           <div className={styles.infoWindows}>
+            {selected.image_url && (
+              <img
+                src={selected.image_url}
+                alt="Restaurant image"
+                className={styles.image}
+              />
+            )}
+            {!selected.image_url && (
+              <Image
+                src="/image/No_Image_Available.jpg"
+                alt="No image available"
+                width={150}
+                height={150}
+                className={`${styles.image} ${styles.image__noimage}`}
+              />
+            )}
             <h1>{selected.name}</h1>
             <p className={styles.alias}>{selected.alias}</p>
             <IconContext.Provider value={{ className: styles.star }}>
@@ -69,8 +89,13 @@ export default function PlaceInfo({ businessList }) {
               </p>
             </IconContext.Provider>
             <p className={styles.categories}>{selected.categories}</p>
-            <p>{selected.location}</p>
-            <p>{selected.phone}</p>
+            <p className={styles.location}>
+              <BsFillHouseHeartFill className={styles.icon} />{" "}
+              {selected.location}
+            </p>
+            <p className={styles.phone}>
+              <BsPhoneFill className={styles.icon} /> {selected.phone}
+            </p>
 
             <div className={styles.footer}>
               <IconContext.Provider value={{ className: styles.link }}>
