@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
+import { useContext, useEffect, useState } from "react";
 import Image from "next/image";
 import styles from "./index.module.css";
 import { IconContext } from "react-icons";
@@ -10,8 +11,25 @@ import {
   BsBookmarkHeartFill,
   BsBookmarkHeart,
 } from "react-icons/bs";
+import AppContext from "@/context/AppContext";
 
 const List = ({ isListView, businessList }) => {
+  const { userState, favorites, setFavorites } = useContext(AppContext);
+
+  const handleToggleFavorite = (data) => {
+    const duplicate = favorites.findIndex((item) => item.id === data.id);
+    if (duplicate === -1) {
+      setFavorites([...favorites, data]);
+    } else {
+      setFavorites(favorites.filter((item) => item.id !== data.id));
+    }
+  };
+
+  const handleCheckFavorite = (data) => {
+    const checkFavorite = favorites.some((item) => item.id === data.id);
+    return checkFavorite;
+  };
+
   return (
     <div className={`${styles.container} ${isListView && styles.listOpen}`}>
       <div className={styles.listItemWrapper}>
@@ -55,11 +73,31 @@ const List = ({ isListView, businessList }) => {
                     <BsPhoneFill className={styles.icon} /> {item.phone}
                   </p>
                 </div>
-                <IconContext.Provider value={{ className: styles.link }}>
-                  <a href={item.url} target="blank" rel="noopener noreferrer">
-                    Link <BiLinkExternal />
-                  </a>
-                </IconContext.Provider>
+                <div className={styles.link__favorite}>
+                  <IconContext.Provider value={{ className: styles.link }}>
+                    <a href={item.url} target="blank" rel="noopener noreferrer">
+                      Link <BiLinkExternal />
+                    </a>
+                  </IconContext.Provider>
+
+                  {userState && (
+                    <button
+                      className={styles.favoritesBtn}
+                      onClick={() => handleToggleFavorite(item)}
+                    >
+                      {/* できれば三項演算子で関数は使わない */}
+                      {handleCheckFavorite(item) ? (
+                        <BsBookmarkHeartFill
+                          className={styles.favoritesBtnIconOn}
+                        />
+                      ) : (
+                        <BsBookmarkHeart
+                          className={styles.favoritesBtnIconOff}
+                        />
+                      )}
+                    </button>
+                  )}
+                </div>
               </div>
             </div>
           );
