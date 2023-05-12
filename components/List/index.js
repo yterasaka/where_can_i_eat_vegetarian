@@ -26,13 +26,13 @@ const List = ({ isListView, businessList }) => {
   };
 
   const handleCheckFavorite = (data) => {
-    const checkFavorite = favorites.some((item) => item.id === data.id);
+    const checkFavorite = favorites.some((item) => item.id === data.id); // is 変数名
     return checkFavorite;
   };
 
   return (
     <div className={`${styles.container} ${isListView && styles.listOpen}`}>
-      {!businessList.length && (
+      {!businessList?.length && (
         <p className={styles.noResults}>
           Your favorite restaurants have not yet been selected.
         </p>
@@ -71,11 +71,12 @@ const List = ({ isListView, businessList }) => {
                 </div>
                 <div className={styles.address__phone}>
                   <p className={styles.textS}>
-                    <BsFillHouseHeartFill className={styles.icon} />{" "}
-                    {item.location}
+                    <BsFillHouseHeartFill className={styles.icon} />
+                    &nbsp;{item.location}
                   </p>
                   <p className={styles.textS}>
-                    <BsPhoneFill className={styles.icon} /> {item.phone}
+                    <BsPhoneFill className={styles.icon} />
+                    &nbsp;{item.phone}
                   </p>
                 </div>
                 <div className={styles.link__favorite}>
@@ -90,7 +91,7 @@ const List = ({ isListView, businessList }) => {
                       className={styles.favoritesBtn}
                       onClick={() => handleToggleFavorite(item)}
                     >
-                      {/* できれば三項演算子で関数は使わない */}
+                      {/* TODO: できれば三項演算子で関数は使わない */}
                       {handleCheckFavorite(item) ? (
                         <BsBookmarkHeartFill
                           className={styles.favoritesBtnIconOn}

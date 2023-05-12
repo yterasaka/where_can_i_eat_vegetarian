@@ -80,7 +80,6 @@ const Register = () => {
         handleSubmit(handleRegister);
         break;
       default:
-        break;
     }
   };
 

@@ -48,7 +48,6 @@ const Login = () => {
         handleSubmit(handleLogin);
         break;
       default:
-        break;
     }
   };
 
