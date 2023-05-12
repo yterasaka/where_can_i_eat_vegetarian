@@ -14,7 +14,7 @@ const options = {
   zoomControl: true,
 };
 
-function Map({ selectedCity, businessList }) {
+function Map({ selectedCity, businessList, isListView, setIsListView }) {
   const { isLoaded, loadError } = useJsApiLoader({
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY,
   });
@@ -38,7 +38,13 @@ function Map({ selectedCity, businessList }) {
         options={options}
         onLoad={onMapLoad}
       >
-        {<PlaceInfo businessList={businessList} />}
+        {
+          <PlaceInfo
+            businessList={businessList}
+            isListView={isListView}
+            setIsListView={setIsListView}
+          />
+        }
       </GoogleMap>
     );
   };

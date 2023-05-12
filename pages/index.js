@@ -78,7 +78,12 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <Map selectedCity={selectedCity} businessList={businessList} />
+        <Map
+          selectedCity={selectedCity}
+          businessList={businessList}
+          isListView={isListView}
+          setIsListView={setIsListView}
+        />
         <List isListView={isListView} businessList={businessList} />
       </main>
     </Layout>

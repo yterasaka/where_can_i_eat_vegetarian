@@ -14,7 +14,7 @@ import styles from "./index.module.css";
 import AppContext from "@/context/AppContext";
 import Image from "next/image";
 
-export default function PlaceInfo({ businessList }) {
+export default function PlaceInfo({ businessList, isListView, setIsListView }) {
   const { userState, favorites, setFavorites } = useContext(AppContext);
   const [selected, setSelected] = useState(null);
 
@@ -27,12 +27,18 @@ export default function PlaceInfo({ businessList }) {
     }
   };
 
-  // favorite に追加されているレストランのハートマークをピンクにする
   // TODO: useStateを使って書き直す
   const toggleIcon = () => {
     if (selected) {
       const toggle = favorites.some((item) => item.id === selected.id);
       return toggle;
+    }
+  };
+
+  const handleToggleView = (marker) => {
+    setSelected(marker);
+    if (isListView) {
+      setIsListView(false);
     }
   };
 
@@ -46,8 +52,11 @@ export default function PlaceInfo({ businessList }) {
             lng: marker.coordinates.longitude,
           }}
           onClick={() => {
-            setSelected(marker);
+            handleToggleView(marker);
           }}
+          // onClick={() => {
+          //   setSelected(marker);
+          // }}
           icon={{
             url: "/carrot.svg",
           }}
