@@ -109,6 +109,11 @@
   font-size: 1.2rem;
 }
 
+.noResults {
+  padding: 20px;
+  color: var(--darkgray);
+}
+
 @media screen and (max-width: 640px) {
   .container {
     padding-left: 10px;

@@ -32,6 +32,11 @@ const List = ({ isListView, businessList }) => {
 
   return (
     <div className={`${styles.container} ${isListView && styles.listOpen}`}>
+      {!businessList.length && (
+        <p className={styles.noResults}>
+          Your favorite restaurants have not yet been selected.
+        </p>
+      )}
       <div className={styles.listItemWrapper}>
         {businessList?.map((item, index) => {
           const number = index + 1;
