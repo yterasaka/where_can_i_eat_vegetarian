@@ -1,10 +1,11 @@
-import Link from "next/link";
+// import Link from "next/link";
 import styles from "./index.module.css";
 import { RiFileListFill } from "react-icons/ri";
 import { BsBookmarkHeartFill, BsBookmarkHeart } from "react-icons/bs";
 import { useContext, useEffect, useRef, useState } from "react";
-import Cookies from "js-cookie";
+// import Cookies from "js-cookie";
 import AppContext from "@/context/AppContext";
+import Menu from "../Menu";
 
 const Layout = ({
   children,
@@ -15,29 +16,29 @@ const Layout = ({
 }) => {
   const {
     userState,
-    setUserState,
+    // setUserState,
     showFavorites,
     setShowFavorites,
     selected,
     setSelected,
   } = useContext(AppContext);
-  const [openMenu, setOpenMenu] = useState(false);
+  // const [openMenu, setOpenMenu] = useState(false);
   const cities = ["Tokyo", "Yokohama", "Nagoya", "Kyoto", "Osaka"];
-  const dropdownRef = useRef(null);
+  // const dropdownRef = useRef(null);
 
   const handleChange = (e) => {
     setSelectedCity(e.target.value);
   };
 
-  const handleOpen = () => {
-    setOpenMenu(!openMenu);
-  };
+  // const handleOpen = () => {
+  //   setOpenMenu(!openMenu);
+  // };
 
-  const handleLogout = () => {
-    Cookies.remove("token");
-    setUserState(null);
-    window.location.reload();
-  };
+  // const handleLogout = () => {
+  //   Cookies.remove("token");
+  //   setUserState(null);
+  //   window.location.reload();
+  // };
 
   // 地図のお気に入り表示を切り替える
   const handleToggleFavorite = () => {
@@ -45,18 +46,18 @@ const Layout = ({
   };
 
   // ドロップダウンメニュー枠外をクリックしたときにメニューを閉じる
-  const handleClickOutside = (e) => {
-    if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
-      setOpenMenu(false);
-    }
-  };
+  // const handleClickOutside = (e) => {
+  //   if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+  //     setOpenMenu(false);
+  //   }
+  // };
 
-  useEffect(() => {
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside); // クリーンアップ関数
-    };
-  }, []);
+  // useEffect(() => {
+  //   document.addEventListener("mousedown", handleClickOutside);
+  //   return () => {
+  //     document.removeEventListener("mousedown", handleClickOutside); // クリーンアップ関数
+  //   };
+  // }, []);
 
   // 地図表示とリスト表示の切り替え
   const handleToggleView = () => {
@@ -109,7 +110,8 @@ const Layout = ({
           </button>
         </div>
 
-        <div className={styles.dropdown} ref={dropdownRef}>
+        <Menu />
+        {/* <div className={styles.dropdown} ref={dropdownRef}>
           <button onClick={handleOpen} className={styles.dropbtn}>
             Menu
           </button>
@@ -146,7 +148,7 @@ const Layout = ({
               )}
             </div>
           )}
-        </div>
+        </div> */}
       </header>
       <main>{children}</main>
     </div>
