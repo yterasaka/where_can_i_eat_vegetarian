@@ -1,6 +1,6 @@
 .formWrapper {
   position: relative;
-  background-color: var(--white);
+  background-color: var(--ghostwhite);
   margin: 100px auto;
   padding: 0 1em;
   max-width: 370px;
@@ -43,7 +43,8 @@
 
 .formInput {
   background-color: var(--whitesmoke);
-  border: none;
+  border: 1px solid var(--lightgray);
+  border-radius: 5px;
   padding: 10px 15px;
   margin-bottom: 15px;
 }
@@ -67,7 +68,7 @@
 .editBtn {
   margin-bottom: 1em;
   border: none;
-  background-color: var(--white);
+  background-color: var(--ghostwhite);
   color: var(--green);
   font-size: 0.9em;
   cursor: pointer;
@@ -79,7 +80,7 @@
 
 .formBtnPwd {
   border: none;
-  background-color: var(--white);
+  background-color: var(--ghostwhite);
   color: var(--green);
   font-size: 0.9em;
   padding-bottom: 2em;
@@ -93,7 +94,7 @@
 .deleteBtn {
   margin-bottom: 2em;
   border: none;
-  background-color: var(--white);
+  background-color: var(--ghostwhite);
   color: var(--gray);
   font-size: 0.8em;
   cursor: pointer;
@@ -107,5 +108,6 @@
   .formWrapper {
     max-width: 300px;
     margin: 50px auto;
+    box-shadow: none;
   }
 }

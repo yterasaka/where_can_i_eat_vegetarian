@@ -2,8 +2,19 @@
   color: var(--darkgray);
 }
 
+.image {
+  width: 230px;
+  height: 150px;
+  object-fit: cover;
+  margin-right: 25px;
+}
+
+.image__noimage {
+  object-fit: contain;
+}
+
 .alias {
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   font-style: italic;
 }
 
@@ -13,10 +24,24 @@
   color: var(--darkgreen);
 }
 
+.location {
+  font-size: 0.9rem;
+}
+
+.phone {
+  font-size: 0.9rem;
+}
+
 .star {
   font-size: 0.9rem;
   color: var(--darkgreen);
   vertical-align: -1px;
+}
+
+.icon {
+  margin-right: 5px;
+  vertical-align: -2px;
+  color: var(--green);
 }
 
 .link {
@@ -47,4 +72,12 @@
 .footer {
   margin-top: 5px;
   display: flex;
+}
+
+@media screen and (max-width: 640px) {
+  .image {
+    width: 150px;
+    height: 120px;
+    margin-bottom: 5px;
+  }
 }

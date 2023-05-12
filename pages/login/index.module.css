@@ -1,6 +1,6 @@
 .formWrapper {
   position: relative;
-  background-color: var(--white);
+  background-color: var(--ghostwhite);
   margin: 100px auto;
   padding: 0 1em;
   max-width: 370px;
@@ -23,11 +23,13 @@
 .formItem {
   margin-bottom: 0.75em;
   width: 100%;
+  position: relative;
 }
 
 .formInput {
   background-color: var(--whitesmoke);
-  border: none;
+  border: 1px solid var(--lightgray);
+  border-radius: 5px;
   padding: 10px 15px;
   margin-bottom: 15px;
   width: 100%;
@@ -65,9 +67,22 @@
   margin: 0 10px 20px;
 }
 
+.passwordReveal {
+  left: auto;
+  position: absolute;
+  right: 10px;
+  top: 14px;
+}
+
+.passwordIcon {
+  font-size: 1.2rem;
+  color: var(--gray);
+}
+
 @media screen and (max-width: 640px) {
   .formWrapper {
     max-width: 300px;
     margin: 50px auto;
+    box-shadow: none;
   }
 }

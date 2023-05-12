@@ -1,5 +1,5 @@
 .container {
-  background-color: var(--white);
+  background-color: var(--ghostwhite);
   width: 100%;
 }
 
@@ -19,10 +19,6 @@
 .titleContainer {
   margin-left: 1rem;
   display: flex;
-}
-
-.titleLeft {
-  margin-left: 1rem;
 }
 
 .selecter {
@@ -58,10 +54,17 @@
   }
 }
 
+.menuButtons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: auto;
+}
+
 .favoritesBtn {
   border: none;
   background-color: transparent;
-  margin: 5px 45px 0 auto;
+  margin: 5px 25px 0;
 }
 
 .favoritesBtn:hover {
@@ -77,6 +80,27 @@
 .favoritesBtnIconOff {
   color: var(--gray);
   font-size: 1.5rem;
+}
+
+.listButton {
+  background-color: transparent;
+  border: none;
+  margin-right: 25px;
+}
+.listButtonIcon {
+  color: var(--gray);
+  border: none;
+  font-size: 1.5rem;
+  vertical-align: -5px;
+}
+
+.listButtonIconActive {
+  color: var(--mediumseagreen);
+}
+
+.listButton:hover {
+  opacity: 0.7;
+  cursor: pointer;
 }
 
 .dropbtn {
@@ -125,5 +149,8 @@
   }
   .dropdown {
     margin-right: 15px;
+  }
+  .selecter {
+    margin-left: 0;
   }
 }

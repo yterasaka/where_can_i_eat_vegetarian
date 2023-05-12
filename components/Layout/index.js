@@ -1,15 +1,26 @@
-import Image from "next/image";
 import Link from "next/link";
 import styles from "./index.module.css";
-// import { FiGithub, FiLinkedin } from "react-icons/fi";
+import { RiFileListFill } from "react-icons/ri";
 import { BsBookmarkHeartFill, BsBookmarkHeart } from "react-icons/bs";
 import { useContext, useEffect, useRef, useState } from "react";
 import Cookies from "js-cookie";
 import AppContext from "@/context/AppContext";
 
-const Layout = ({ children, selectedCity, setSelectedCity }) => {
-  const { userState, setUserState, showFavorites, setShowFavorites } =
-    useContext(AppContext);
+const Layout = ({
+  children,
+  selectedCity,
+  setSelectedCity,
+  isListView,
+  setIsListView,
+}) => {
+  const {
+    userState,
+    setUserState,
+    showFavorites,
+    setShowFavorites,
+    selected,
+    setSelected,
+  } = useContext(AppContext);
   const [openMenu, setOpenMenu] = useState(false);
   const cities = ["Tokyo", "Yokohama", "Nagoya", "Kyoto", "Osaka"];
   const dropdownRef = useRef(null);
@@ -47,18 +58,19 @@ const Layout = ({ children, selectedCity, setSelectedCity }) => {
     };
   }, []);
 
+  // 地図表示とリスト表示の切り替え
+  const handleToggleView = () => {
+    setIsListView(!isListView);
+    if (selected) {
+      setSelected(null);
+    }
+  };
+
   return (
     <div className={styles.container}>
       <header className={styles.header}>
         {/* 左側の要素 */}
         <div className={styles.titleContainer}>
-          <Image
-            src="/logo.png"
-            alt="Logo"
-            width={30}
-            height={30}
-            className={styles.logo}
-          />
           <p className={styles.titleLeft}>Where Can I Eat Vegetarian in</p>
           <select
             className={styles.selecter}
@@ -75,18 +87,28 @@ const Layout = ({ children, selectedCity, setSelectedCity }) => {
         </div>
 
         {/* 右側の要素 */}
-        {userState && (
-          <button
-            className={styles.favoritesBtn}
-            onClick={handleToggleFavorite}
-          >
-            {showFavorites ? (
-              <BsBookmarkHeartFill className={styles.favoritesBtnIconOn} />
-            ) : (
-              <BsBookmarkHeart className={styles.favoritesBtnIconOff} />
-            )}
+        <div className={styles.menuButtons}>
+          {userState && (
+            <button
+              className={styles.favoritesBtn}
+              onClick={handleToggleFavorite}
+            >
+              {showFavorites ? (
+                <BsBookmarkHeartFill className={styles.favoritesBtnIconOn} />
+              ) : (
+                <BsBookmarkHeart className={styles.favoritesBtnIconOff} />
+              )}
+            </button>
+          )}
+          <button className={styles.listButton} onClick={handleToggleView}>
+            <RiFileListFill
+              className={`${styles.listButtonIcon} ${
+                isListView && styles.listButtonIconActive
+              }`}
+            />
           </button>
-        )}
+        </div>
+
         <div className={styles.dropdown} ref={dropdownRef}>
           <button onClick={handleOpen} className={styles.dropbtn}>
             Menu
@@ -98,6 +120,9 @@ const Layout = ({ children, selectedCity, setSelectedCity }) => {
                   <Link href="/user" className={styles.dropdownItem}>
                     Account
                   </Link>
+                  <Link href="/about" className={styles.dropdownItem}>
+                    About
+                  </Link>
                   <button
                     className={styles.dropdownItem}
                     onClick={handleLogout}
@@ -108,6 +133,9 @@ const Layout = ({ children, selectedCity, setSelectedCity }) => {
               )}
               {!userState && (
                 <>
+                  <Link href="/about" className={styles.dropdownItem}>
+                    About
+                  </Link>
                   <Link href="/login" className={styles.dropdownItem}>
                     Log in
                   </Link>
@@ -119,22 +147,6 @@ const Layout = ({ children, selectedCity, setSelectedCity }) => {
             </div>
           )}
         </div>
-        {/* <div className={styles.link}>
-          <a
-            href={"https://github.com/yterasaka"}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <FiGithub className={styles.linkButton} />
-          </a>
-          <a
-            href={"https://www.linkedin.com/in/yuki-terasaka-a5399b129/"}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <FiLinkedin className={styles.linkButton} />
-          </a>
-        </div> */}
       </header>
       <main>{children}</main>
     </div>

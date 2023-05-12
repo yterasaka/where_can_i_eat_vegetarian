@@ -2,6 +2,7 @@ import AppContext from "@/context/AppContext";
 import { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import styles from "./index.module.css";
+import { HiOutlineEye, HiOutlineEyeOff } from "react-icons/hi";
 import { registerUser, checkUsername, checkEmail } from "../../lib/auth";
 import { postFavorite } from "@/lib/favorites";
 import Header from "../../components/Header";
@@ -20,48 +21,66 @@ const Register = () => {
     email: "",
     password: "",
   });
+  const [composing, setComposing] = useState(false);
+  const [passwordType, setPasswordType] = useState("password");
+
+  const togglePassword = () => {
+    if (passwordType === "password") {
+      setPasswordType("text");
+    }
+    if (passwordType === "text") {
+      setPasswordType("password");
+    }
+  };
 
   const username = watch("username");
   const email = watch("email");
 
   useEffect(() => {
-    const result = async () => {
-      const result = await checkUsername(username).then((res) => {
+    (async () => {
+      await checkUsername(username).then((res) => {
         if (res.length) {
           setIsUsernameValid(true);
         } else {
           setIsUsernameValid(false);
         }
       });
-    };
-    result();
+    })();
   }, [username]);
 
   useEffect(() => {
-    const result = async () => {
-      const result = await checkEmail(email).then((res) => {
+    (async () => {
+      await checkEmail(email).then((res) => {
         if (res.length) {
           setIsEmailValid(true);
         } else {
           setIsEmailValid(false);
         }
       });
-    };
-    result();
+    })();
   }, [email]);
 
   const handleRegister = (data) => {
-    console.log("name", data.username);
-    console.log("email", data.email);
-    console.log("password", data.password);
-
     registerUser(data.username, data.email, data.password)
       .then((res) => {
         setUserState(res.data.user);
         postFavorite(res.data.user.id);
         window.location.replace("/");
       })
-      .catch((err) => console.log(err.response.data.error.message));
+      .catch((err) => console.log(err));
+  };
+
+  const startComposition = () => setComposing(true);
+  const endComposition = () => setComposing(false);
+
+  const onKeydown = (key) => {
+    switch (key) {
+      case "Enter":
+        if (composing) break;
+        handleSubmit(handleRegister);
+        break;
+      default:
+    }
   };
 
   return (
@@ -75,6 +94,9 @@ const Register = () => {
               className={styles.formInput}
               name="username"
               placeholder="username"
+              onKeyDown={(e) => onKeydown(e.key)}
+              onCompositionStart={startComposition}
+              onCompositionEnd={endComposition}
               {...register("username", {
                 required: "Please enter your name",
                 minLength: {
@@ -97,6 +119,9 @@ const Register = () => {
               className={styles.formInput}
               name="email"
               placeholder="your@example.com"
+              onKeyDown={(e) => onKeydown(e.key)}
+              onCompositionStart={startComposition}
+              onCompositionEnd={endComposition}
               {...register("email", {
                 required: "Please enter your email address",
                 pattern: {
@@ -119,7 +144,11 @@ const Register = () => {
             <input
               className={styles.formInput}
               name="password"
+              type={passwordType}
               placeholder="password"
+              onKeyDown={(e) => onKeydown(e.key)}
+              onCompositionStart={startComposition}
+              onCompositionEnd={endComposition}
               {...register("password", {
                 required: "Please enter your password",
                 pattern: {
@@ -129,13 +158,24 @@ const Register = () => {
                 },
               })}
             />
+            <span onClick={togglePassword} className={styles.passwordReveal}>
+              {passwordType === "password" && (
+                <i>
+                  <HiOutlineEyeOff className={styles.passwordIcon} />
+                </i>
+              )}
+              {passwordType === "text" && (
+                <i className="passwordIcon">
+                  <HiOutlineEye className={styles.passwordIcon} />
+                </i>
+              )}
+            </span>
+
             {errors.password && (
               <p className={styles.errorMessage}>{errors.password?.message}</p>
             )}
           </div>
-          <button className={styles.formBtn} onClick={handleRegister}>
-            Register
-          </button>
+          <input type="submit" value="Register" className={styles.formBtn} />
         </form>
       </div>
     </div>

@@ -2,11 +2,13 @@ import { useState, useEffect, useContext } from "react";
 import Head from "next/head";
 import Layout from "../components/Layout";
 import Map from "../components/Map";
+import List from "../components/List";
 import AppContext from "@/context/AppContext";
 
 export default function Home() {
   const [selectedCity, setSelectedCity] = useState("Tokyo");
   const [businessData, setBusinessData] = useState(null);
+  const [isListView, setIsListView] = useState(false);
   const { favorites, showFavorites } = useContext(AppContext);
 
   useEffect(() => {
@@ -54,12 +56,18 @@ export default function Home() {
         : business.location.display_address.join(", "),
       phone: business.phone,
       url: business.url,
+      image_url: business.image_url,
     };
     return businessInfo;
   });
 
   return (
-    <Layout selectedCity={selectedCity} setSelectedCity={setSelectedCity}>
+    <Layout
+      selectedCity={selectedCity}
+      setSelectedCity={setSelectedCity}
+      isListView={isListView}
+      setIsListView={setIsListView}
+    >
       <Head>
         <title>Where Can I Eat Vegetarian?</title>
         <meta
@@ -70,7 +78,13 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <Map selectedCity={selectedCity} businessList={businessList} />
+        <Map
+          selectedCity={selectedCity}
+          businessList={businessList}
+          isListView={isListView}
+          setIsListView={setIsListView}
+        />
+        <List isListView={isListView} businessList={businessList} />
       </main>
     </Layout>
   );
