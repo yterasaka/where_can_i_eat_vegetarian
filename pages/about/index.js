@@ -1,5 +1,7 @@
 import styles from "./index.module.css";
 import Header from "../../components/Header";
+import { BsBookmarkHeart } from "react-icons/bs";
+import { RiFileListFill } from "react-icons/ri";
 
 const About = () => {
   return (
@@ -30,14 +32,19 @@ const About = () => {
             3. Click a marker on the map to view restaurant information.
           </li>
           <li className={styles.listItem}>
-            4. If you are logged in, you can add a restaurant as a Favourite by
-            clicking the Favourites icon in the bottom right-hand corner of the
-            restaurant information window.
+            4. Click on the list button <RiFileListFill /> in the menu bar to
+            see a list of restaurants displayed on the map from below.
           </li>
           <li className={styles.listItem}>
-            5. If you are signed in, a Favourites icon will appear to the right
-            of the Menu button. Clicking this button will only show you the
-            restaurants you have added to your Favourites.
+            5. If you are logged in, you can add a restaurant as a Favourite by
+            clicking the Favourites button <BsBookmarkHeart /> in the bottom
+            right-hand corner of the restaurant information window.
+          </li>
+          <li className={styles.listItem}>
+            6. If you are signed in, a Favourites button <BsBookmarkHeart />{" "}
+            will appear to the right of the Menu button. Clicking this button
+            will only show you the restaurants you have added to your
+            Favourites.
           </li>
         </ul>
         <p>
@@ -51,6 +58,19 @@ const About = () => {
             contact form
           </a>
           . Your feedback is a valuable resource for me as a developer.
+        </p>
+        <p>
+          Moreover, the source code for the app is available on{" "}
+          <a
+            href="https://github.com/yterasaka/where_can_i_eat_vegetarian"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            GitHub
+          </a>
+          , should you want to look into it more deeply or contribute to its
+          development. I appreciate your time and input in helping to improve
+          this application.
         </p>
       </div>
     </div>
