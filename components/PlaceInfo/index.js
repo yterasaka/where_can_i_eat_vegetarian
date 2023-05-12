@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { MarkerF, InfoWindowF } from "@react-google-maps/api";
 import { IconContext } from "react-icons";
 import { BiLinkExternal } from "react-icons/bi";
@@ -15,8 +15,8 @@ import AppContext from "@/context/AppContext";
 import Image from "next/image";
 
 export default function PlaceInfo({ businessList, isListView, setIsListView }) {
-  const { userState, favorites, setFavorites } = useContext(AppContext);
-  const [selected, setSelected] = useState(null);
+  const { userState, favorites, setFavorites, selected, setSelected } =
+    useContext(AppContext);
 
   const handleToggleFavorite = (data) => {
     const duplicate = favorites.findIndex((item) => item.id === data.id);
@@ -54,9 +54,6 @@ export default function PlaceInfo({ businessList, isListView, setIsListView }) {
           onClick={() => {
             handleToggleView(marker);
           }}
-          // onClick={() => {
-          //   setSelected(marker);
-          // }}
           icon={{
             url: "/carrot.svg",
           }}
