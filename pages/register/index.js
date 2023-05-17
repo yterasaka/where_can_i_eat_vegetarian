@@ -94,6 +94,7 @@ const Register = () => {
               className={styles.formInput}
               name="username"
               placeholder="username"
+              autoFocus={true}
               onKeyDown={(e) => onKeydown(e.key)}
               onCompositionStart={startComposition}
               onCompositionEnd={endComposition}

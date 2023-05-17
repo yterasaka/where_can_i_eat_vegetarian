@@ -36,6 +36,7 @@ const ResetPwd = () => {
               id="password"
               name="password"
               placeholder="Password"
+              autoFocus={true}
               onChange={handleChange}
             />
           </div>

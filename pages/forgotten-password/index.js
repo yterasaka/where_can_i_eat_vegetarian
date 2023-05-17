@@ -33,6 +33,7 @@ const ForgottenPwd = () => {
               type="email"
               name="email"
               placeholder="Email"
+              autoFocus={true}
               onChange={handleChange}
             ></input>
           </div>

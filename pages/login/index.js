@@ -62,6 +62,7 @@ const Login = () => {
               className={styles.formInput}
               name="identifier"
               placeholder="Username or Email"
+              autoFocus={true}
               onKeyDown={(e) => onKeydown(e.key)}
               onCompositionStart={startComposition}
               onCompositionEnd={endComposition}
