@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { MarkerF, InfoWindowF } from "@react-google-maps/api";
 import { IconContext } from "react-icons";
 import { BiLinkExternal } from "react-icons/bi";
@@ -17,6 +17,7 @@ import Image from "next/image";
 export default function PlaceInfo({ businessList, isListView, setIsListView }) {
   const { userState, favorites, setFavorites, selected, setSelected } =
     useContext(AppContext);
+  const [selectedIndex, setSelectedIndex] = useState(null);
 
   const handleToggleFavorite = (data) => {
     const duplicate = favorites.findIndex((item) => item.id === data.id);
@@ -40,7 +41,21 @@ export default function PlaceInfo({ businessList, isListView, setIsListView }) {
     if (isListView) {
       setIsListView(false);
     }
+    setSelectedIndex(null);
   };
+
+  const handleCloseInfoWindow = () => {
+    setSelected(null);
+    setSelectedIndex(null);
+  };
+
+  useEffect(() => {
+    businessList?.map((item, index) => {
+      if (item.id === selected?.id) {
+        setSelectedIndex(index + 1);
+      }
+    });
+  }, [selected, businessList]);
 
   return (
     <>
@@ -66,15 +81,34 @@ export default function PlaceInfo({ businessList, isListView, setIsListView }) {
         />
       ))}
 
+      {selectedIndex && (
+        <MarkerF
+          key={`${
+            selected.coordinates.latitude * selected.coordinates.longitude
+          }`}
+          position={{
+            lat: selected.coordinates.latitude,
+            lng: selected.coordinates.longitude,
+          }}
+          label={{ text: `${selectedIndex}`, color: "#ff0000" }}
+          icon={{
+            path: google.maps.SymbolPath.CIRCLE,
+            fillColor: "#fff",
+            fillOpacity: 1,
+            scale: 14,
+            strokeColor: "#ff0000",
+            strokeWeight: 1,
+          }}
+        />
+      )}
+
       {selected && (
         <InfoWindowF
           position={{
             lat: selected.coordinates.latitude,
             lng: selected.coordinates.longitude,
           }}
-          onCloseClick={() => {
-            setSelected(null);
-          }}
+          onCloseClick={handleCloseInfoWindow}
         >
           <div className={styles.infoWindows}>
             {selected.image_url && (

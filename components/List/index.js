@@ -60,7 +60,7 @@ const List = ({ isListView, businessList }) => {
               )}
               <div className={styles.information}>
                 <h1>{`${number}. ${item.name}`}</h1>
-                <p className={styles.alias}>{item.alias}</p>
+                <div className={styles.alias}>{item.alias}</div>
                 <div className={styles.star__categories}>
                   <IconContext.Provider value={{ className: styles.star }}>
                     <p className={styles.rating}>
@@ -70,18 +70,18 @@ const List = ({ isListView, businessList }) => {
                   <p className={styles.categories}>{item.categories}</p>
                 </div>
                 <div className={styles.address__phone}>
-                  <p className={styles.address}>
+                  <div className={styles.address}>
                     <div className={styles.address__phone__icon}>
                       <FaMapMarkerAlt className={styles.icon} />
                     </div>
                     <p className={styles.address__text}>{item.location}</p>
-                  </p>
-                  <p className={styles.phone}>
+                  </div>
+                  <div className={styles.phone}>
                     <div className={styles.address__phone__icon}>
                       <BsPhoneFill className={styles.icon} />
                     </div>
                     <p className={styles.phone__text}>{item.phone}</p>
-                  </p>
+                  </div>
                 </div>
                 <div className={styles.link__favorite}>
                   <IconContext.Provider value={{ className: styles.link }}>
