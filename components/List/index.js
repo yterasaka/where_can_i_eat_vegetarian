@@ -1,16 +1,16 @@
 /* eslint-disable @next/next/no-img-element */
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import Image from "next/image";
 import styles from "./index.module.css";
 import { IconContext } from "react-icons";
 import { BiLinkExternal } from "react-icons/bi";
 import {
   BsStarFill,
-  BsFillHouseHeartFill,
   BsPhoneFill,
   BsBookmarkHeartFill,
   BsBookmarkHeart,
 } from "react-icons/bs";
+import { FaMapMarkerAlt } from "react-icons/fa";
 import AppContext from "@/context/AppContext";
 
 const List = ({ isListView, businessList }) => {
@@ -63,20 +63,24 @@ const List = ({ isListView, businessList }) => {
                 <p className={styles.alias}>{item.alias}</p>
                 <div className={styles.star__categories}>
                   <IconContext.Provider value={{ className: styles.star }}>
-                    <p>
+                    <p className={styles.rating}>
                       <BsStarFill /> {item.rating}
                     </p>
                   </IconContext.Provider>
                   <p className={styles.categories}>{item.categories}</p>
                 </div>
                 <div className={styles.address__phone}>
-                  <p className={styles.textS}>
-                    <BsFillHouseHeartFill className={styles.icon} />
-                    &nbsp;{item.location}
+                  <p className={styles.address}>
+                    <div className={styles.address__phone__icon}>
+                      <FaMapMarkerAlt className={styles.icon} />
+                    </div>
+                    <p className={styles.address__text}>{item.location}</p>
                   </p>
-                  <p className={styles.textS}>
-                    <BsPhoneFill className={styles.icon} />
-                    &nbsp;{item.phone}
+                  <p className={styles.phone}>
+                    <div className={styles.address__phone__icon}>
+                      <BsPhoneFill className={styles.icon} />
+                    </div>
+                    <p className={styles.phone__text}>{item.phone}</p>
                   </p>
                 </div>
                 <div className={styles.link__favorite}>

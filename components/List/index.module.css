@@ -64,6 +64,10 @@
   color: var(--green);
 }
 
+.rating {
+  width: 43px;
+}
+
 .icon {
   margin-right: 5px;
   vertical-align: -2px;
@@ -71,13 +75,33 @@
 }
 
 .categories {
-  margin-left: 15px;
+  margin-left: 10px;
   color: var(--darkgreen);
   font-size: 0.9rem;
 }
 
-.textS {
+.address__phone__icon {
+  width: 15px;
+}
+
+.address {
+  display: flex;
+  margin-bottom: 3px;
+}
+
+.address__text {
   font-size: 0.9rem;
+  margin-left: 10px;
+}
+
+.phone {
+  display: flex;
+  margin-bottom: 3px;
+}
+
+.phone__text {
+  font-size: 0.9rem;
+  margin-left: 10px;
 }
 
 .address__phone {
@@ -125,11 +149,5 @@
   }
   .listItem {
     flex-direction: column;
-  }
-  .star__categories {
-    flex-direction: column;
-  }
-  .categories {
-    margin-left: 0;
   }
 }
