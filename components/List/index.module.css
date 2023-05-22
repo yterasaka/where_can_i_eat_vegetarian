@@ -65,7 +65,7 @@
 }
 
 .rating {
-  width: 43px;
+  width: 50px;
 }
 
 .icon {
@@ -142,6 +142,9 @@
   .container {
     padding-left: 10px;
     padding-right: 10px;
+  }
+  .alias {
+    display: none;
   }
   .image {
     width: 100%;

@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { MarkerF, InfoWindowF } from "@react-google-maps/api";
 import { IconContext } from "react-icons";
 import { BiLinkExternal } from "react-icons/bi";
@@ -44,7 +44,7 @@ export default function PlaceInfo({ businessList, isListView, setIsListView }) {
 
   return (
     <>
-      {businessList?.map((marker) => (
+      {businessList?.map((marker, index) => (
         <MarkerF
           key={`${marker.coordinates.latitude * marker.coordinates.longitude}`}
           position={{
@@ -54,8 +54,14 @@ export default function PlaceInfo({ businessList, isListView, setIsListView }) {
           onClick={() => {
             handleToggleView(marker);
           }}
+          label={{ text: `${index + 1}`, color: "#fff" }}
           icon={{
-            url: "/carrot.svg",
+            path: google.maps.SymbolPath.CIRCLE,
+            fillColor: "#ff0000",
+            fillOpacity: 1,
+            scale: 14,
+            strokeColor: "#fff",
+            strokeWeight: 1,
           }}
         />
       ))}
