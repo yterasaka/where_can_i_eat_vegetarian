@@ -14,7 +14,8 @@ import { FaMapMarkerAlt } from "react-icons/fa";
 import AppContext from "@/context/AppContext";
 
 const List = ({ isListView, businessList }) => {
-  const { userState, favorites, setFavorites } = useContext(AppContext);
+  const { userState, favorites, setFavorites, setSelectedIndex } =
+    useContext(AppContext);
 
   const handleToggleFavorite = (data) => {
     const duplicate = favorites.findIndex((item) => item.id === data.id);
@@ -30,6 +31,14 @@ const List = ({ isListView, businessList }) => {
     return checkFavorite;
   };
 
+  const handleMouseEnter = (index) => {
+    setSelectedIndex(index);
+  };
+
+  const handleMouseLeave = () => {
+    setSelectedIndex(null);
+  };
+
   return (
     <div className={`${styles.container} ${isListView && styles.listOpen}`}>
       {!businessList?.length && (
@@ -38,10 +47,15 @@ const List = ({ isListView, businessList }) => {
         </p>
       )}
       <div className={styles.listItemWrapper}>
-        {businessList?.map((item, index) => {
-          const number = index + 1;
+        {businessList?.map((item) => {
+          const number = item.index + 1;
           return (
-            <div key={item.id} className={styles.listItem}>
+            <div
+              key={item.id}
+              onMouseEnter={() => handleMouseEnter(number)}
+              onMouseLeave={handleMouseLeave}
+              className={styles.listItem}
+            >
               {item.image_url && (
                 <img
                   src={item.image_url}

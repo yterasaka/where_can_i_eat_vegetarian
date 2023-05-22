@@ -12,8 +12,15 @@ const Layout = ({
   isListView,
   setIsListView,
 }) => {
-  const { userState, showFavorites, setShowFavorites, selected, setSelected } =
-    useContext(AppContext);
+  const {
+    userState,
+    showFavorites,
+    setShowFavorites,
+    selected,
+    setSelected,
+    selectedIndex,
+    setSelectedIndex,
+  } = useContext(AppContext);
   const cities = ["Tokyo", "Yokohama", "Nagoya", "Kyoto", "Osaka"];
 
   const handleChange = (e) => {
@@ -28,6 +35,9 @@ const Layout = ({
     setIsListView(!isListView);
     if (selected) {
       setSelected(null);
+    }
+    if (selectedIndex) {
+      setSelectedIndex(null);
     }
   };
 

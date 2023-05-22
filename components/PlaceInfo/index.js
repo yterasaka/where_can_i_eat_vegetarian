@@ -15,9 +15,16 @@ import AppContext from "@/context/AppContext";
 import Image from "next/image";
 
 export default function PlaceInfo({ businessList, isListView, setIsListView }) {
-  const { userState, favorites, setFavorites, selected, setSelected } =
-    useContext(AppContext);
-  const [selectedIndex, setSelectedIndex] = useState(null);
+  const {
+    userState,
+    favorites,
+    setFavorites,
+    selected,
+    setSelected,
+    selectedIndex,
+    setSelectedIndex,
+  } = useContext(AppContext);
+  // const [selectedIndex, setSelectedIndex] = useState(null);
 
   const handleToggleFavorite = (data) => {
     const duplicate = favorites.findIndex((item) => item.id === data.id);
@@ -50,16 +57,17 @@ export default function PlaceInfo({ businessList, isListView, setIsListView }) {
   };
 
   useEffect(() => {
-    businessList?.map((item, index) => {
+    businessList?.map((item) => {
       if (item.id === selected?.id) {
-        setSelectedIndex(index + 1);
+        setSelectedIndex(item.index + 1);
       }
     });
-  }, [selected, businessList]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selected, selectedIndex, businessList]);
 
   return (
     <>
-      {businessList?.map((marker, index) => (
+      {businessList?.map((marker) => (
         <MarkerF
           key={`${marker.coordinates.latitude * marker.coordinates.longitude}`}
           position={{
@@ -69,7 +77,7 @@ export default function PlaceInfo({ businessList, isListView, setIsListView }) {
           onClick={() => {
             handleToggleView(marker);
           }}
-          label={{ text: `${index + 1}`, color: "#fff" }}
+          label={{ text: `${marker.index + 1}`, color: "#fff" }}
           icon={{
             path: google.maps.SymbolPath.CIRCLE,
             fillColor: "#ff0000",
@@ -83,14 +91,15 @@ export default function PlaceInfo({ businessList, isListView, setIsListView }) {
 
       {selectedIndex && (
         <MarkerF
-          key={`${
-            selected.coordinates.latitude * selected.coordinates.longitude
-          }`}
+          key={selectedIndex}
           position={{
-            lat: selected.coordinates.latitude,
-            lng: selected.coordinates.longitude,
+            lat: businessList[selectedIndex - 1]?.coordinates.latitude,
+            lng: businessList[selectedIndex - 1]?.coordinates.longitude,
           }}
-          label={{ text: `${selectedIndex}`, color: "#ff0000" }}
+          label={{
+            text: `${selectedIndex}`,
+            color: "#ff0000",
+          }}
           icon={{
             path: google.maps.SymbolPath.CIRCLE,
             fillColor: "#fff",
@@ -99,6 +108,7 @@ export default function PlaceInfo({ businessList, isListView, setIsListView }) {
             strokeColor: "#ff0000",
             strokeWeight: 1,
           }}
+          zIndex={999}
         />
       )}
 

@@ -37,7 +37,7 @@ export default function Home() {
   };
 
   // オプショナルチェイニング演算子 ?. を使用することで、data が null の場合には処理がスキップされ、エラーが発生しなくなる
-  const businessList = showedRestaurants()?.map((business) => {
+  const businessList = showedRestaurants()?.map((business, index) => {
     const businessInfo = {
       id: business.id,
       name: business.name,
@@ -57,6 +57,7 @@ export default function Home() {
       phone: business.phone,
       url: business.url,
       image_url: business.image_url,
+      index: index,
     };
     return businessInfo;
   });
