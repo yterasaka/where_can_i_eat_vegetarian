@@ -29,7 +29,7 @@ const Menu = () => {
   const handleLogout = () => {
     Cookies.remove("token");
     setUserState(null);
-    window.location.reload();
+    window.location.replace("/");
   };
 
   const handleClickOutside = (e) => {
