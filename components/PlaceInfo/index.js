@@ -69,7 +69,7 @@ export default function PlaceInfo({ businessList, isListView, setIsListView }) {
     <>
       {businessList?.map((marker) => (
         <MarkerF
-          key={`${marker.coordinates.latitude * marker.coordinates.longitude}`}
+          key={marker.index}
           position={{
             lat: marker.coordinates.latitude,
             lng: marker.coordinates.longitude,
