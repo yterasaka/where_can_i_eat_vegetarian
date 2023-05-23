@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import Image from "next/image";
 import styles from "./index.module.css";
 import { IconContext } from "react-icons";
@@ -14,8 +14,14 @@ import { FaMapMarkerAlt } from "react-icons/fa";
 import AppContext from "@/context/AppContext";
 
 const List = ({ isListView, businessList }) => {
-  const { userState, favorites, setFavorites, setSelectedIndex, setPanTo } =
-    useContext(AppContext);
+  const {
+    userState,
+    favorites,
+    setFavorites,
+    setSelectedIndex,
+    selectedMarker,
+    setPanTo,
+  } = useContext(AppContext);
 
   const handleToggleFavorite = (data) => {
     const duplicate = favorites.findIndex((item) => item.id === data.id);
@@ -46,6 +52,13 @@ const List = ({ isListView, businessList }) => {
     });
   };
 
+  useEffect(() => {
+    const element = document.getElementById(selectedMarker);
+    element?.scrollIntoView({
+      behavior: "smooth",
+    });
+  }, [selectedMarker]);
+
   return (
     <div className={`${styles.container} ${isListView && styles.listOpen}`}>
       {!businessList?.length && (
@@ -59,6 +72,7 @@ const List = ({ isListView, businessList }) => {
           return (
             <div
               key={item.id}
+              id={item.index}
               onMouseEnter={() => handleMouseEnter(number)}
               onMouseLeave={handleMouseLeave}
               onClick={() => handlePanTo(item)}

@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import { MarkerF, InfoWindowF } from "@react-google-maps/api";
 import { IconContext } from "react-icons";
 import { BiLinkExternal } from "react-icons/bi";
@@ -23,8 +23,8 @@ export default function PlaceInfo({ businessList, isListView, setIsListView }) {
     setSelected,
     selectedIndex,
     setSelectedIndex,
+    setSelectedMarker,
   } = useContext(AppContext);
-  // const [selectedIndex, setSelectedIndex] = useState(null);
 
   const handleToggleFavorite = (data) => {
     const duplicate = favorites.findIndex((item) => item.id === data.id);
@@ -43,12 +43,17 @@ export default function PlaceInfo({ businessList, isListView, setIsListView }) {
     }
   };
 
-  const handleToggleView = (marker) => {
-    setSelected(marker);
+  const handleClickMarker = (marker) => {
     if (isListView) {
-      setIsListView(false);
+      setSelectedMarker(marker.index);
+      setSelectedIndex(marker.index + 1);
+    } else {
+      setSelected(marker);
+      if (isListView) {
+        setIsListView(false);
+      }
+      setSelectedIndex(null);
     }
-    setSelectedIndex(null);
   };
 
   const handleCloseInfoWindow = () => {
@@ -75,7 +80,7 @@ export default function PlaceInfo({ businessList, isListView, setIsListView }) {
             lng: marker.coordinates.longitude,
           }}
           onClick={() => {
-            handleToggleView(marker);
+            handleClickMarker(marker);
           }}
           label={{ text: `${marker.index + 1}`, color: "#fff" }}
           icon={{
