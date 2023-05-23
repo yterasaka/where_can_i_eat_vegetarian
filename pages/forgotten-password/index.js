@@ -19,7 +19,7 @@ const ForgottenPwd = () => {
   };
 
   return (
-    <div>
+    <div className={styles.body}>
       <Header />
       <div className={styles.formWrapper}>
         <h1 className={styles.title}>Forgot password</h1>

@@ -52,7 +52,7 @@ const Login = () => {
   };
 
   return (
-    <div>
+    <div className={styles.body}>
       <Header />
       <div className={styles.formWrapper}>
         <h1 className={styles.title}>LOG IN</h1>

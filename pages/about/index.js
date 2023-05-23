@@ -5,7 +5,7 @@ import { RiFileListFill } from "react-icons/ri";
 
 const About = () => {
   return (
-    <div>
+    <div className={styles.body}>
       <Header />
       <div className={styles.container}>
         <h1 className={styles.title}>

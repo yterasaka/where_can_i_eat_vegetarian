@@ -23,7 +23,7 @@
 }
 
 body {
-  background-color: var(--darkseagreen);
+  background-color: var(--ghostwhite);
 }
 
 a {
@@ -38,10 +38,4 @@ a:hover {
 
 input:focus {
   outline: solid 2px var(--mediumseagreen);
-}
-
-@media screen and (max-width: 640px) {
-  body {
-    background-color: var(--ghostwhite);
-  }
 }

@@ -11,6 +11,7 @@ export default function App({ Component, pageProps }) {
   const [showFavorites, setShowFavorites] = useState(false);
   const [selected, setSelected] = useState(null);
   const [selectedIndex, setSelectedIndex] = useState(null);
+  const [panTo, setPanTo] = useState(null);
 
   useEffect(() => {
     const token = Cookies.get("token");
@@ -55,6 +56,8 @@ export default function App({ Component, pageProps }) {
         setSelected,
         selectedIndex,
         setSelectedIndex,
+        panTo,
+        setPanTo,
       }}
     >
       <Component {...pageProps} />

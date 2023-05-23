@@ -14,7 +14,7 @@ import { FaMapMarkerAlt } from "react-icons/fa";
 import AppContext from "@/context/AppContext";
 
 const List = ({ isListView, businessList }) => {
-  const { userState, favorites, setFavorites, setSelectedIndex } =
+  const { userState, favorites, setFavorites, setSelectedIndex, setPanTo } =
     useContext(AppContext);
 
   const handleToggleFavorite = (data) => {
@@ -39,6 +39,13 @@ const List = ({ isListView, businessList }) => {
     setSelectedIndex(null);
   };
 
+  const handlePanTo = (item) => {
+    setPanTo({
+      lat: item.coordinates.latitude,
+      lng: item.coordinates.longitude,
+    });
+  };
+
   return (
     <div className={`${styles.container} ${isListView && styles.listOpen}`}>
       {!businessList?.length && (
@@ -54,6 +61,7 @@ const List = ({ isListView, businessList }) => {
               key={item.id}
               onMouseEnter={() => handleMouseEnter(number)}
               onMouseLeave={handleMouseLeave}
+              onClick={() => handlePanTo(item)}
               className={styles.listItem}
             >
               {item.image_url && (

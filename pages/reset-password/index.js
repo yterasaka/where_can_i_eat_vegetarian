@@ -23,7 +23,7 @@ const ResetPwd = () => {
   };
 
   return (
-    <div>
+    <div className={styles.body}>
       <Header />
       <div className={styles.formWrapper}>
         <h1 className={styles.title}>Reset password</h1>

@@ -84,7 +84,7 @@ const Register = () => {
   };
 
   return (
-    <div>
+    <div className={styles.body}>
       <Header />
       <div className={styles.formWrapper}>
         <h1 className={styles.title}>SIGN UP</h1>
