@@ -18,35 +18,43 @@ const About = () => {
           With this application, vegetarians travelling in Japan can easily find
           restaurants where they can eat in peace.
         </p>
-        <h2 className={styles.listTitle}>How to use</h2>
+        <h2 className={styles.listTitle}>How to use the Application</h2>
         <ul className={styles.list}>
           <li className={styles.listItem}>
-            1. Select the city you wish to view from the drop-down box on the
-            menu bar.
+            1. Begin by selecting your desired city from the drop-down box on
+            the menu bar.
           </li>
           <li className={styles.listItem}>
-            2. Click the menu button at the right end of the menu bar to open
-            the menu.
+            2. To access other features, click the menu button on the far right
+            of the menu bar. This will open a drop-down menu that will allow you
+            to navigate to the Login or Account page, etc.
           </li>
           <li className={styles.listItem}>
-            3. Click a marker on the map to view restaurant information.
+            3. For restaurant information, simply click on a marker on the map.
           </li>
           <li className={styles.listItem}>
-            4. Click on the list button <RiFileListFill /> in the menu bar to
-            see a list of restaurants displayed on the map from below.
+            4. To view a list of restaurants displayed on the map, click the
+            List button <RiFileListFill /> on the menu bar. <br />
+            Hovering over a list item will change the color of the corresponding
+            marker on the map. Clicking on a list item will reposition the map
+            so that the corresponding marker appears in the center. <br />
+            In addition, clicking a marker on the map will automatically scroll
+            the list to bring the corresponding item into view.
           </li>
           <li className={styles.listItem}>
-            5. If you are logged in, you can add a restaurant as a Favourite by
-            clicking the Favourites button <BsBookmarkHeart /> in the bottom
-            right-hand corner of the restaurant information window.
+            5. If you are logged in, you can add a restaurant to your Favorites
+            by clicking the Favorites button <BsBookmarkHeart /> in the lower
+            right hand corner of the restaurant information window.
           </li>
           <li className={styles.listItem}>
-            6. If you are signed in, a Favourites button <BsBookmarkHeart />{" "}
-            will appear to the right of the Menu button. Clicking this button
-            will only show you the restaurants you have added to your
-            Favourites.
+            6. If you are logged in, a Favorites button <BsBookmarkHeart /> will
+            appear to the right of the Menu button. Clicking this button will
+            filter the view to show only the restaurants you have added to your
+            Favorites.
           </li>
         </ul>
+
+        <h2 className={styles.listTitle}>Feedback & Source code</h2>
         <p>
           If you have any feedback on the app or features you would like to see
           added, you can easily submit it using the{" "}
