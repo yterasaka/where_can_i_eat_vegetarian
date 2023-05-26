@@ -47,13 +47,10 @@ export default function PlaceInfo({ businessList, isListView, setIsListView }) {
     if (isListView) {
       setSelectedMarker(marker.index);
       setSelectedIndex(marker.index + 1);
-    } else {
-      setSelected(marker);
-      if (isListView) {
-        setIsListView(false);
-      }
-      setSelectedIndex(null);
+      return;
     }
+    setSelected(marker);
+    setSelectedIndex(null);
   };
 
   const handleCloseInfoWindow = () => {

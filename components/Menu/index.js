@@ -20,7 +20,7 @@ const Menu = () => {
     if (router.pathname === "/") {
       handleIsHome();
     }
-  });
+  }, [router.pathname]);
 
   const handleOpen = () => {
     setOpenMenu(!openMenu);
