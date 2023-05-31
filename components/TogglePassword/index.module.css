@@ -1,0 +1,11 @@
+.passwordReveal {
+  left: auto;
+  position: absolute;
+  right: 10px;
+  top: 29px;
+}
+
+.passwordIcon {
+  font-size: 1.2rem;
+  color: var(--gray);
+}
