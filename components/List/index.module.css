@@ -116,28 +116,6 @@
   vertical-align: -2px;
 }
 
-.favoritesBtn {
-  border: none;
-  background-color: transparent;
-  margin-left: 25px;
-  vertical-align: -2px;
-}
-
-.favoritesBtn:hover {
-  opacity: 0.7;
-  cursor: pointer;
-}
-
-.favoritesBtnIconOn {
-  color: var(--palevioletred);
-  font-size: 1.2rem;
-}
-
-.favoritesBtnIconOff {
-  color: var(--gray);
-  font-size: 1.2rem;
-}
-
 .noResults {
   padding: 20px;
   color: var(--darkgray);

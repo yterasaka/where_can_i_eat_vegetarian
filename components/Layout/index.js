@@ -27,7 +27,7 @@ const Layout = ({
     setSelectedCity(e.target.value);
   };
 
-  const handleToggleFavorite = () => {
+  const handleToggleShowFavorite = () => {
     setShowFavorites(!showFavorites);
   };
 
@@ -66,7 +66,7 @@ const Layout = ({
           {userState && (
             <button
               className={styles.favoritesBtn}
-              onClick={handleToggleFavorite}
+              onClick={handleToggleShowFavorite}
             >
               {showFavorites ? (
                 <BsBookmarkHeartFill className={styles.favoritesBtnIconOn} />

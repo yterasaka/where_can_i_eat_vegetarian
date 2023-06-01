@@ -3,45 +3,20 @@ import React, { useContext, useEffect } from "react";
 import { MarkerF, InfoWindowF } from "@react-google-maps/api";
 import { IconContext } from "react-icons";
 import { BiLinkExternal } from "react-icons/bi";
-import {
-  BsStarFill,
-  BsFillHouseHeartFill,
-  BsPhoneFill,
-  BsBookmarkHeartFill,
-  BsBookmarkHeart,
-} from "react-icons/bs";
+import { BsStarFill, BsFillHouseHeartFill, BsPhoneFill } from "react-icons/bs";
 import styles from "./index.module.css";
 import AppContext from "@/context/AppContext";
 import Image from "next/image";
+import FavoriteButton from "../FavoriteButton";
 
-export default function PlaceInfo({ businessList, isListView, setIsListView }) {
+export default function PlaceInfo({ businessList, isListView }) {
   const {
-    userState,
-    favorites,
-    setFavorites,
     selected,
     setSelected,
     selectedIndex,
     setSelectedIndex,
     setSelectedMarker,
   } = useContext(AppContext);
-
-  const handleToggleFavorite = (data) => {
-    const duplicate = favorites.findIndex((item) => item.id === data.id);
-    if (duplicate === -1) {
-      setFavorites([...favorites, data]);
-    } else {
-      setFavorites(favorites.filter((item) => item.id !== data.id));
-    }
-  };
-
-  // TODO: useStateを使って書き直す
-  const toggleIcon = () => {
-    if (selected) {
-      const toggle = favorites.some((item) => item.id === selected.id);
-      return toggle;
-    }
-  };
 
   const handleClickMarker = (marker) => {
     if (isListView) {
@@ -161,21 +136,7 @@ export default function PlaceInfo({ businessList, isListView, setIsListView }) {
                   Link <BiLinkExternal />
                 </a>
               </IconContext.Provider>
-              {userState && (
-                <button
-                  className={styles.favoritesBtn}
-                  onClick={() => handleToggleFavorite(selected)}
-                >
-                  {/* できれば三項演算子で関数は使わない */}
-                  {toggleIcon() ? (
-                    <BsBookmarkHeartFill
-                      className={styles.favoritesBtnIconOn}
-                    />
-                  ) : (
-                    <BsBookmarkHeart className={styles.favoritesBtnIconOff} />
-                  )}
-                </button>
-              )}
+              <FavoriteButton businessListItem={selected} />
             </div>
           </div>
         </InfoWindowF>
