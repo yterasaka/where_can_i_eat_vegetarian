@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./index.module.css";
+import Menu from "../Menu";
 
 const Header = () => {
   return (
@@ -15,6 +16,7 @@ const Header = () => {
             className={styles.logo}
           />
         </Link>
+        <Menu />
       </header>
     </div>
   );

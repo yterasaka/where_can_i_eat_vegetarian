@@ -1,3 +1,8 @@
+.body {
+  background-color: var(--darkseagreen);
+  height: 100vh;
+}
+
 .container {
   color: var(--darkgray);
   width: 600px;
@@ -29,6 +34,10 @@
 }
 
 @media screen and (max-width: 640px) {
+  .body {
+    background-color: var(--ghostwhite);
+    height: 100%;
+  }
   .container {
     margin: 0;
     padding: 50px 40px;

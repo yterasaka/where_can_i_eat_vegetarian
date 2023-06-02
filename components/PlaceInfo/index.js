@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import { MarkerF, InfoWindowF } from "@react-google-maps/api";
 import { IconContext } from "react-icons";
 import { BiLinkExternal } from "react-icons/bi";
@@ -15,8 +15,16 @@ import AppContext from "@/context/AppContext";
 import Image from "next/image";
 
 export default function PlaceInfo({ businessList, isListView, setIsListView }) {
-  const { userState, favorites, setFavorites, selected, setSelected } =
-    useContext(AppContext);
+  const {
+    userState,
+    favorites,
+    setFavorites,
+    selected,
+    setSelected,
+    selectedIndex,
+    setSelectedIndex,
+    setSelectedMarker,
+  } = useContext(AppContext);
 
   const handleToggleFavorite = (data) => {
     const duplicate = favorites.findIndex((item) => item.id === data.id);
@@ -35,30 +43,79 @@ export default function PlaceInfo({ businessList, isListView, setIsListView }) {
     }
   };
 
-  const handleToggleView = (marker) => {
-    setSelected(marker);
+  const handleClickMarker = (marker) => {
     if (isListView) {
-      setIsListView(false);
+      setSelectedMarker(marker.index);
+      setSelectedIndex(marker.index + 1);
+    } else {
+      setSelected(marker);
+      if (isListView) {
+        setIsListView(false);
+      }
+      setSelectedIndex(null);
     }
   };
+
+  const handleCloseInfoWindow = () => {
+    setSelected(null);
+    setSelectedIndex(null);
+  };
+
+  useEffect(() => {
+    businessList?.map((item) => {
+      if (item.id === selected?.id) {
+        setSelectedIndex(item.index + 1);
+      }
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selected, selectedIndex, businessList]);
 
   return (
     <>
       {businessList?.map((marker) => (
         <MarkerF
-          key={`${marker.coordinates.latitude * marker.coordinates.longitude}`}
+          key={marker.index}
           position={{
             lat: marker.coordinates.latitude,
             lng: marker.coordinates.longitude,
           }}
           onClick={() => {
-            handleToggleView(marker);
+            handleClickMarker(marker);
           }}
+          label={{ text: `${marker.index + 1}`, color: "#fff" }}
           icon={{
-            url: "/carrot.svg",
+            path: google.maps.SymbolPath.CIRCLE,
+            fillColor: "#ff0000",
+            fillOpacity: 1,
+            scale: 14,
+            strokeColor: "#fff",
+            strokeWeight: 1,
           }}
         />
       ))}
+
+      {selectedIndex && (
+        <MarkerF
+          key={selectedIndex}
+          position={{
+            lat: businessList[selectedIndex - 1]?.coordinates.latitude,
+            lng: businessList[selectedIndex - 1]?.coordinates.longitude,
+          }}
+          label={{
+            text: `${selectedIndex}`,
+            color: "#ff0000",
+          }}
+          icon={{
+            path: google.maps.SymbolPath.CIRCLE,
+            fillColor: "#fff",
+            fillOpacity: 1,
+            scale: 14,
+            strokeColor: "#ff0000",
+            strokeWeight: 1,
+          }}
+          zIndex={999}
+        />
+      )}
 
       {selected && (
         <InfoWindowF
@@ -66,9 +123,7 @@ export default function PlaceInfo({ businessList, isListView, setIsListView }) {
             lat: selected.coordinates.latitude,
             lng: selected.coordinates.longitude,
           }}
-          onCloseClick={() => {
-            setSelected(null);
-          }}
+          onCloseClick={handleCloseInfoWindow}
         >
           <div className={styles.infoWindows}>
             {selected.image_url && (

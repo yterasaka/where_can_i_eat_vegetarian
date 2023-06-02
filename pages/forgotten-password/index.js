@@ -19,7 +19,7 @@ const ForgottenPwd = () => {
   };
 
   return (
-    <div>
+    <div className={styles.body}>
       <Header />
       <div className={styles.formWrapper}>
         <h1 className={styles.title}>Forgot password</h1>
@@ -33,6 +33,7 @@ const ForgottenPwd = () => {
               type="email"
               name="email"
               placeholder="Email"
+              autoFocus={true}
               onChange={handleChange}
             ></input>
           </div>

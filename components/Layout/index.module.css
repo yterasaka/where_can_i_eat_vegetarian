@@ -103,7 +103,7 @@
   cursor: pointer;
 }
 
-.dropbtn {
+/* .dropbtn {
   background-color: var(--mediumseagreen);
   color: white;
   padding: 16px;
@@ -141,15 +141,15 @@
 
 .dropdownItem:hover {
   color: var(--gray);
-}
+} */
 
 @media screen and (max-width: 640px) {
   .favoritesBtn {
     margin: 5px 15px 0 auto;
   }
-  .dropdown {
+  /* .dropdown {
     margin-right: 15px;
-  }
+  } */
   .selecter {
     margin-left: 0;
   }

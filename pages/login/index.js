@@ -52,7 +52,7 @@ const Login = () => {
   };
 
   return (
-    <div>
+    <div className={styles.body}>
       <Header />
       <div className={styles.formWrapper}>
         <h1 className={styles.title}>LOG IN</h1>
@@ -62,6 +62,7 @@ const Login = () => {
               className={styles.formInput}
               name="identifier"
               placeholder="Username or Email"
+              autoFocus={true}
               onKeyDown={(e) => onKeydown(e.key)}
               onCompositionStart={startComposition}
               onCompositionEnd={endComposition}

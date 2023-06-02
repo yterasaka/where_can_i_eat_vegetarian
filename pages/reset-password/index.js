@@ -23,7 +23,7 @@ const ResetPwd = () => {
   };
 
   return (
-    <div>
+    <div className={styles.body}>
       <Header />
       <div className={styles.formWrapper}>
         <h1 className={styles.title}>Reset password</h1>
@@ -36,6 +36,7 @@ const ResetPwd = () => {
               id="password"
               name="password"
               placeholder="Password"
+              autoFocus={true}
               onChange={handleChange}
             />
           </div>
