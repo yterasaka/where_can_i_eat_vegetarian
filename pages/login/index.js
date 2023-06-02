@@ -3,28 +3,18 @@ import Link from "next/link";
 import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import styles from "./index.module.css";
-import { HiOutlineEye, HiOutlineEyeOff } from "react-icons/hi";
 import { login } from "../../lib/auth";
 import Header from "../../components/Header";
+import TogglePassword from "@/components/TogglePassword";
 
 const Login = () => {
-  const { setUserState } = useContext(AppContext);
+  const { setUserState, passwordType } = useContext(AppContext);
   const { register, handleSubmit } = useForm({
     identifier: "",
     password: "",
   });
   const [isInputValid, setIsInputValid] = useState(false);
   const [composing, setComposing] = useState(false);
-  const [passwordType, setPasswordType] = useState("password");
-
-  const togglePassword = () => {
-    if (passwordType === "password") {
-      setPasswordType("text");
-    }
-    if (passwordType === "text") {
-      setPasswordType("password");
-    }
-  };
 
   const handleLogin = (data) => {
     login(data.identifier, data.password)
@@ -80,19 +70,7 @@ const Login = () => {
               onCompositionEnd={endComposition}
               {...register("password")}
             />
-
-            <span onClick={togglePassword} className={styles.passwordReveal}>
-              {passwordType === "password" && (
-                <i>
-                  <HiOutlineEyeOff className={styles.passwordIcon} />
-                </i>
-              )}
-              {passwordType === "text" && (
-                <i className="passwordIcon">
-                  <HiOutlineEye className={styles.passwordIcon} />
-                </i>
-              )}
-            </span>
+            <TogglePassword />
           </div>
 
           {isInputValid && (

@@ -62,18 +62,6 @@
   margin: 5px 10px;
 }
 
-.passwordReveal {
-  left: auto;
-  position: absolute;
-  right: 10px;
-  top: 29px;
-}
-
-.passwordIcon {
-  font-size: 1.2rem;
-  color: var(--gray);
-}
-
 @media screen and (max-width: 640px) {
   .body {
     background-color: var(--ghostwhite);

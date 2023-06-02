@@ -2,13 +2,13 @@ import AppContext from "@/context/AppContext";
 import { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import styles from "./index.module.css";
-import { HiOutlineEye, HiOutlineEyeOff } from "react-icons/hi";
 import { registerUser, checkUsername, checkEmail } from "../../lib/auth";
 import { postFavorite } from "@/lib/favorites";
 import Header from "../../components/Header";
+import TogglePassword from "@/components/TogglePassword";
 
 const Register = () => {
-  const { setUserState } = useContext(AppContext);
+  const { setUserState, passwordType } = useContext(AppContext);
   const [isUsernameValid, setIsUsernameValid] = useState(false);
   const [isEmailValid, setIsEmailValid] = useState(false);
   const {
@@ -22,16 +22,6 @@ const Register = () => {
     password: "",
   });
   const [composing, setComposing] = useState(false);
-  const [passwordType, setPasswordType] = useState("password");
-
-  const togglePassword = () => {
-    if (passwordType === "password") {
-      setPasswordType("text");
-    }
-    if (passwordType === "text") {
-      setPasswordType("password");
-    }
-  };
 
   const username = watch("username");
   const email = watch("email");
@@ -159,18 +149,7 @@ const Register = () => {
                 },
               })}
             />
-            <span onClick={togglePassword} className={styles.passwordReveal}>
-              {passwordType === "password" && (
-                <i>
-                  <HiOutlineEyeOff className={styles.passwordIcon} />
-                </i>
-              )}
-              {passwordType === "text" && (
-                <i className="passwordIcon">
-                  <HiOutlineEye className={styles.passwordIcon} />
-                </i>
-              )}
-            </span>
+            <TogglePassword />
 
             {errors.password && (
               <p className={styles.errorMessage}>{errors.password?.message}</p>
