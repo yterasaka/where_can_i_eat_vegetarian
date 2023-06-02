@@ -16,14 +16,8 @@
 .title {
   color: var(--darkgreen);
   text-align: center;
-  padding: 1em 0;
+  padding: 1em 0 0.5em;
   font-size: 1.8em;
-}
-
-.message {
-  font-size: 1em;
-  color: var(--green);
-  margin-bottom: 2em;
 }
 
 .form {
@@ -33,6 +27,7 @@
 .formItem {
   margin-bottom: 0.75em;
   width: 100%;
+  position: relative;
 }
 
 .formInput {
@@ -40,11 +35,12 @@
   border: 1px solid var(--lightgray);
   border-radius: 5px;
   padding: 10px 15px;
-  margin-bottom: 15px;
+  margin-top: 15px;
+  width: 100%;
 }
 
 .formBtn {
-  margin: 0 0 15px;
+  margin: 25px 0;
   padding: 10px 15px;
   width: 50%;
   border: none;

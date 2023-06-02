@@ -41,12 +41,13 @@
   border-radius: 5px;
   padding: 10px 15px;
   margin-bottom: 15px;
+  width: 100%;
 }
 
 .formBtn {
   margin: 0 0 15px;
   padding: 10px 15px;
-  width: 50%;
+  width: 70%;
   border: none;
   border-radius: 5px;
   background-color: var(--mediumseagreen);

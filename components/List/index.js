@@ -4,38 +4,13 @@ import Image from "next/image";
 import styles from "./index.module.css";
 import { IconContext } from "react-icons";
 import { BiLinkExternal } from "react-icons/bi";
-import {
-  BsStarFill,
-  BsPhoneFill,
-  BsBookmarkHeartFill,
-  BsBookmarkHeart,
-} from "react-icons/bs";
+import { BsStarFill, BsPhoneFill } from "react-icons/bs";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import AppContext from "@/context/AppContext";
+import FavoriteButton from "../FavoriteButton";
 
 const List = ({ isListView, businessList }) => {
-  const {
-    userState,
-    favorites,
-    setFavorites,
-    setSelectedIndex,
-    selectedMarker,
-    setPanTo,
-  } = useContext(AppContext);
-
-  const handleToggleFavorite = (data) => {
-    const duplicate = favorites.findIndex((item) => item.id === data.id);
-    if (duplicate === -1) {
-      setFavorites([...favorites, data]);
-    } else {
-      setFavorites(favorites.filter((item) => item.id !== data.id));
-    }
-  };
-
-  const handleCheckFavorite = (data) => {
-    const checkFavorite = favorites.some((item) => item.id === data.id); // is 変数名
-    return checkFavorite;
-  };
+  const { setSelectedIndex, selectedMarker, setPanTo } = useContext(AppContext);
 
   const handleMouseEnter = (index) => {
     setSelectedIndex(index);
@@ -125,24 +100,7 @@ const List = ({ isListView, businessList }) => {
                       Link <BiLinkExternal />
                     </a>
                   </IconContext.Provider>
-
-                  {userState && (
-                    <button
-                      className={styles.favoritesBtn}
-                      onClick={() => handleToggleFavorite(item)}
-                    >
-                      {/* TODO: できれば三項演算子で関数は使わない */}
-                      {handleCheckFavorite(item) ? (
-                        <BsBookmarkHeartFill
-                          className={styles.favoritesBtnIconOn}
-                        />
-                      ) : (
-                        <BsBookmarkHeart
-                          className={styles.favoritesBtnIconOff}
-                        />
-                      )}
-                    </button>
-                  )}
+                  <FavoriteButton businessListItem={item} />
                 </div>
               </div>
             </div>

@@ -7,6 +7,7 @@ import Header from "../../components/Header";
 const ForgottenPwd = () => {
   const router = useRouter();
   const [email, setEmail] = useState("");
+  console.log(email);
 
   const handleSendEmail = () => {
     sendEmail(email);

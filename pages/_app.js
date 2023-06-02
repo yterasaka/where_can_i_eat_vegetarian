@@ -13,6 +13,7 @@ export default function App({ Component, pageProps }) {
   const [selectedIndex, setSelectedIndex] = useState(null);
   const [selectedMarker, setSelectedMarker] = useState(null);
   const [panTo, setPanTo] = useState(null);
+  const [passwordType, setPasswordType] = useState("password");
 
   useEffect(() => {
     const token = Cookies.get("token");
@@ -61,6 +62,8 @@ export default function App({ Component, pageProps }) {
         setSelectedMarker,
         panTo,
         setPanTo,
+        passwordType,
+        setPasswordType,
       }}
     >
       <Component {...pageProps} />
