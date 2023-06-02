@@ -15,8 +15,8 @@ const FavoriteButton = ({ businessListItem }) => {
     }
   };
   const handleCheckFavorite = (data) => {
-    const checkFavorite = favorites.some((item) => item.id === data.id); // is 変数名
-    return checkFavorite;
+    const isCheckFavorite = favorites.some((item) => item.id === data.id);
+    return isCheckFavorite;
   };
 
   return (
