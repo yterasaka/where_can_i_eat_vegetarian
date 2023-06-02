@@ -5,7 +5,7 @@ import styles from "./index.module.css";
 import { registerUser, checkUsername, checkEmail } from "../../lib/auth";
 import { postFavorite } from "@/lib/favorites";
 import Header from "../../components/Header";
-import TogglePassword from "@/components/TogglePassword";
+import TogglePasswordIcon from "@/components/TogglePasswordIcon";
 
 const Register = () => {
   const { setUserState, passwordType } = useContext(AppContext);
@@ -149,7 +149,7 @@ const Register = () => {
                 },
               })}
             />
-            <TogglePassword />
+            <TogglePasswordIcon />
 
             {errors.password && (
               <p className={styles.errorMessage}>{errors.password?.message}</p>

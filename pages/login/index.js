@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import styles from "./index.module.css";
 import { login } from "../../lib/auth";
 import Header from "../../components/Header";
-import TogglePassword from "@/components/TogglePassword";
+import TogglePasswordIcon from "@/components/TogglePasswordIcon";
 
 const Login = () => {
   const { setUserState, passwordType } = useContext(AppContext);
@@ -70,7 +70,7 @@ const Login = () => {
               onCompositionEnd={endComposition}
               {...register("password")}
             />
-            <TogglePassword />
+            <TogglePasswordIcon />
           </div>
 
           {isInputValid && (

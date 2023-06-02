@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import styles from "./index.module.css";
 import { resetPwd } from "../../lib/auth";
 import Header from "../../components/Header";
-import TogglePassword from "@/components/TogglePassword";
+import TogglePasswordIcon from "@/components/TogglePasswordIcon";
 import AppContext from "@/context/AppContext";
 
 const ResetPwd = () => {
@@ -41,7 +41,7 @@ const ResetPwd = () => {
               autoFocus={true}
               onChange={handleChange}
             />
-            <TogglePassword />
+            <TogglePasswordIcon />
           </div>
           <div className={styles.formItem}>
             <input
@@ -52,7 +52,7 @@ const ResetPwd = () => {
               placeholder="Password confirmation"
               onChange={handleChange}
             />
-            <TogglePassword />
+            <TogglePasswordIcon />
           </div>
           <button className={styles.formBtn} onClick={handleResetPwd}>
             Apply

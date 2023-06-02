@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { HiOutlineEye, HiOutlineEyeOff } from "react-icons/hi";
 import styles from "./index.module.css";
 
-const TogglePassword = () => {
+const TogglePasswordIcon = () => {
   const { passwordType, setPasswordType } = useContext(AppContext);
 
   const togglePassword = () => {
@@ -31,4 +31,4 @@ const TogglePassword = () => {
   );
 };
 
-export default TogglePassword;
+export default TogglePasswordIcon;
