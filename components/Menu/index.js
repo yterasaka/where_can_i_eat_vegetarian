@@ -80,12 +80,13 @@ const Menu = () => {
               <Link href="/about" className={styles.dropdownItem}>
                 About
               </Link>
-              // <Link href="/login" className={styles.dropdownItem}>
-                // Log in
-              // </Link>
-              // <Link href="/register" className={styles.dropdownItem}>
-                // Sign in
-              // </Link>
+              {/*
+              <Link href="/login" className={styles.dropdownItem}>
+                Log in
+              </Link>
+              <Link href="/register" className={styles.dropdownItem}>
+                Sign in
+              </Link> */}
             </>
           )}
         </div>
